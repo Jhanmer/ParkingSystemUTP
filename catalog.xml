@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/Servicio-Autenticacion/login?wsdl" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/Servicio-Autenticacion/login.wsdl"/>
     <system systemId="http://localhost:8080/Servicio-Autenticacion/login?xsd=1" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/Servicio-Autenticacion/login.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?wsdl" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.wsdl"/>
+    <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?xsd=1" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.xsd_1.xsd"/>
 </catalog>

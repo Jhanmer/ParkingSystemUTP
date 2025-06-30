@@ -1,28 +1,19 @@
-
 package servicios;
 
+import autenticacion.Login;
 import autenticacion.LoginResponse;
 import autenticacion.Login_Service;
-import autenticacion.Login;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.WebServiceRef;
-
-
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-
-    @WebServiceRef(wsdlLocation = "http://localhost:8080/Servicio-Autenticacion/login?WSDL")
-    private Login_Service service;
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,36 +26,34 @@ public class LoginServlet extends HttpServlet {
             LoginResponse resultado = iniciarSesion(correo, contrasena);
 
             if (resultado.isSuccess()) {
-                // Guardar datos en sesión si deseas
-                request.getSession().setAttribute("usuario", resultado.getNombreCompleto());
-                request.getSession().setAttribute("rol", resultado.getRol());
-                request.getSession().setAttribute("correo", correo);
+                HttpSession session = request.getSession();
+                session.setAttribute("usuario", resultado.getNombreCompleto());
+                session.setAttribute("rol", resultado.getRol());
+                session.setAttribute("correo", correo);
 
-
-                // Redirigir según el rol
+                // Redireccionar según el rol, o a index.jsp
                 response.sendRedirect("index.jsp");
             } else {
-                // Enviar mensaje de error al login
+                // Error de credenciales
                 request.setAttribute("error", resultado.getMessage());
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Error al conectar con el servicio.");
+            request.setAttribute("error", "Error al conectar con el servicio de autenticación.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
-
-    private LoginResponse iniciarSesion(java.lang.String correo, java.lang.String contrasena) {
-        autenticacion.Login port = service.getLoginPort();
+    private LoginResponse iniciarSesion(String correo, String contrasena) {
+        Login_Service service = new Login_Service(); // Se instancia manualmente
+        Login port = service.getLoginPort();         // Se obtiene el puerto
         return port.iniciarSesion(correo, contrasena);
     }
 
+    @Override
+    public String getServletInfo() {
+        return "Controlador de inicio de sesión";
+    }
 }

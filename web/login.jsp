@@ -131,8 +131,8 @@
 
                   <p class="text-center">
                     <span>¿Aún no tienes acceso?</span>
-                    <a href="#">
-                      <span>Solicita tu registro</span>
+                    <a href="registro.jsp">
+                        <span>Solicita tu registro</span>
                     </a>
                   </p>
                 </div>
