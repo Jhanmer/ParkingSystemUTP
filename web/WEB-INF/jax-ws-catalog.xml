@@ -4,4 +4,8 @@
     <system systemId="http://localhost:8080/Servicio-Autenticacion/login?xsd=1" uri="wsdl/localhost_8080/Servicio-Autenticacion/login.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?wsdl" uri="wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.wsdl"/>
     <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?xsd=1" uri="wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Servicio_ListarUsuarios/ServicioListarUsuarios?wsdl" uri="wsdl/localhost_8080/Servicio_ListarUsuarios/ServicioListarUsuarios.wsdl"/>
+    <system systemId="http://localhost:8080/Servicio_ListarUsuarios/ServicioListarUsuarios?xsd=1" uri="wsdl/localhost_8080/Servicio_ListarUsuarios/ServicioListarUsuarios.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ListarReserva/ServicioReservas?wsdl" uri="wsdl/localhost_8080/ListarReserva/ServicioReservas.wsdl"/>
+    <system systemId="http://localhost:8080/ListarReserva/ServicioReservas?xsd=1" uri="wsdl/localhost_8080/ListarReserva/ServicioReservas.xsd_1.xsd"/>
 </catalog>

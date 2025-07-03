@@ -67,10 +67,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="GestionReservaADM.jsp" class="menu-link">
-                   <div data-i18n="Account">Gestión de reservas</div>
-                  </a>
-                </li>
+  <a href="<%= request.getContextPath() %>/listarReservas" class="menu-link">
+    <i class="menu-icon tf-icons bx bx-list-ul"></i>
+    <div>Listado de Reservas</div>
+  </a>
+</li>
+
               </ul>
             </li>
             <li class="menu-item">
@@ -101,18 +103,18 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-user"></i>
-                    <div data-i18n="Account Settings">Usuarios</div>
-              </a>
-              <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="GestionUsuarios.jsp" class="menu-link">
-                            <div data-i18n="Account">Gestión de Usuarios</div>
-                      </a>
-                    </li>
-              </ul>
-            </li>
+  <a href="javascript:void(0);" class="menu-link menu-toggle">
+    <i class="menu-icon tf-icons bx bx-user"></i>
+    <div data-i18n="Account Settings">Usuarios</div>
+  </a>
+  <ul class="menu-sub">
+    <li class="menu-item">
+      <a href="<%= request.getContextPath() %>/listar" class="menu-link">
+        <div data-i18n="Account">Listado de Usuarios</div>
+      </a>
+    </li>
+  </ul>
+</li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>

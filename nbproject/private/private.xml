@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/src/java/controlador/RegistroServlet.java</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/src/java/dao/Conexion.java</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/web/login.jsp</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/web/registro.jsp</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/web/index.jsp</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/src/java/servicios/HoraPeruServlet.java</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/src/java/servicios/LoginServlet.java</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/src/java/util/Conexion.java</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/web/vehiculo.jsp</file>
-            <file>file:/C:/Users/arivero/Desktop/ParkingSystemUTP/src/java/servicios/ConsultaPlacaServlet.java</file>
+            <file>file:/C:/Users/Acer/Documents/NetBeansProjects/ParkingSystemUTP/web/login.jsp</file>
+            <file>file:/C:/Users/Acer/Documents/NetBeansProjects/ParkingSystemUTP/src/java/servicios/LoginServlet.java</file>
+            <file>file:/C:/Users/Acer/Documents/NetBeansProjects/ParkingSystemUTP/src/java/dao/Conexion.java</file>
+            <file>file:/C:/Users/Acer/Documents/NetBeansProjects/ParkingSystemUTP/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
