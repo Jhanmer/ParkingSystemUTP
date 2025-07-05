@@ -12,7 +12,7 @@
 
     <div class="card">
       <div class="card-body">
-        
+
         <table class="table table-striped">
           <thead>
             <tr>
@@ -34,8 +34,8 @@
             %>
             <tr>
               <td><%= r.getId() %></td>
-              <td><%= r.getUsuarioId() %></td>
-              <td><%= r.getCodEsta() %></td>
+              <td><%= r.getNombreUsuario() %> <%= r.getApellidoUsuario() %></td>
+              <td><%= r.getNumeroEstacionamiento() %></td>
               <td><%= r.getFecha() %></td>
               <td><%= r.getHoraInicio() %></td>
               <td><%= r.getHoraFin() %></td>
@@ -44,13 +44,12 @@
                 <form action="cambiarEstadoReserva" method="post" style="display:flex; gap:5px;">
                   <input type="hidden" name="idReserva" value="<%= r.getId() %>">
                   <select name="nuevoEstado" class="form-select" style="width: 130px;">
-    <option value="reservada" <%= r.getEstado().equalsIgnoreCase("reservada") ? "selected" : "" %>>Reservada</option>
-    <option value="asistio" <%= r.getEstado().equalsIgnoreCase("asistio") ? "selected" : "" %>>Asistió</option>
-    <option value="cancelada" <%= r.getEstado().equalsIgnoreCase("cancelada") ? "selected" : "" %>>Cancelada</option>
-    <option value="no_asistio" <%= r.getEstado().equalsIgnoreCase("no_asistio") ? "selected" : "" %>>No Asistió</option>
-    <option value="culmino_tiempo" <%= r.getEstado().equalsIgnoreCase("culmino_tiempo") ? "selected" : "" %>>Culminó Tiempo</option>
-</select>
-
+                    <option value="reservada" <%= r.getEstado().equalsIgnoreCase("reservada") ? "selected" : "" %>>Reservada</option>
+                    <option value="asistio" <%= r.getEstado().equalsIgnoreCase("asistio") ? "selected" : "" %>>Asistió</option>
+                    <option value="cancelada" <%= r.getEstado().equalsIgnoreCase("cancelada") ? "selected" : "" %>>Cancelada</option>
+                    <option value="no_asistio" <%= r.getEstado().equalsIgnoreCase("no_asistio") ? "selected" : "" %>>No Asistió</option>
+                    <option value="culmino_tiempo" <%= r.getEstado().equalsIgnoreCase("culmino_tiempo") ? "selected" : "" %>>Culminó Tiempo</option>
+                  </select>
                   <button type="submit" class="btn btn-primary btn-sm">Cambiar</button>
                 </form>
               </td>

@@ -21,7 +21,6 @@ public class ListarReservasServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         try {
             ServicioReservas port = servicio.getServicioReservasPort();
             List<Reserva> lista = port.listarReservas();
