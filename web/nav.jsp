@@ -169,6 +169,7 @@
                               <span class="fw-semibold d-block"><%= session.getAttribute("usuario") %></span>
                               <small class="text-muted d-block"><%= session.getAttribute("correo") %></small>
                               <small class="text-muted d-block"><%= session.getAttribute("rol") %></small>
+                              <small class="text-muted d-block">ID: <%= session.getAttribute("idUsuario") %></small>
                             </div>
                           </div>
                         </a>
@@ -196,4 +197,13 @@
           </nav>
 
           <!-- / Navbar -->
-<!-- / Nav -->
+<!-- 
+<%
+Integer id = (Integer) session.getAttribute("idUsuario");
+if (id != null && id == 1) {
+    // Mostrar contenido especial para el usuario con ID 1
+}
+%>
+<a href="perfil.jsp?id=<%= session.getAttribute("idUsuario") %>">Ver mi perfil</a>
+
+-->
