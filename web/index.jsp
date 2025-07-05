@@ -52,55 +52,22 @@
   </div>
 
   <!-- JavaScript para sincronizar hora con el servlet -->
-  <script>
-    let peruDate = null;
-    let lastApiFetchTime = 0;
-    let localTickIntervalId = null;
-
-    function updateDisplayLocally() {
-      if (peruDate) {
-        const elapsedMillis = Date.now() - lastApiFetchTime;
-        const currentPeruTimeMillis = peruDate.getTime() + elapsedMillis;
-        const displayDate = new Date(currentPeruTimeMillis);
-
-        const hours = String(displayDate.getHours()).padStart(2, '0');
-        const minutes = String(displayDate.getMinutes()).padStart(2, '0');
-        const seconds = String(displayDate.getSeconds()).padStart(2, '0');
-
-        const formattedTime = `${hours}:${minutes}:${seconds}`;
-        document.getElementById('hora-peru').textContent = formattedTime;
-      } else {
-        document.getElementById('hora-peru').textContent = 'Cargando...';
-      }
-    }
-
-    function fetchAndSyncTime() {
-      fetch('<%= request.getContextPath() %>/horaPeru')
-        .then(response => {
-          if (!response.ok) throw new Error("No se pudo obtener la hora.");
-          return response.text();
-        })
-        .then(data => {
-          const timestamp = parseInt(data.trim(), 10);
-          if (!isNaN(timestamp)) {
-            peruDate = new Date(timestamp * 1000);
-            lastApiFetchTime = Date.now();
-
-            clearInterval(localTickIntervalId);
-            localTickIntervalId = setInterval(updateDisplayLocally, 1000);
-            updateDisplayLocally();
-          } else {
-            document.getElementById('hora-peru').textContent = 'Hora inválida';
-          }
-        })
-        .catch(error => {
-          console.error(error);
-          document.getElementById('hora-peru').textContent = 'Error al sincronizar';
-        });
-    }
-
-    fetchAndSyncTime();
-    setInterval(fetchAndSyncTime, 60000); // sincroniza cada 60s
-  </script>
+<script>
+  fetch('https://worldtimeapi.org/api/timezone/America/Lima')
+    .then(response => {
+      if (!response.ok) throw new Error("No se pudo obtener la hora.");
+      return response.json();
+    })
+    .then(data => {
+      const datetime = data.datetime; // ej: "2025-07-05T14:40:33.453689-05:00"
+      const hora = datetime.split("T")[1].split(":");
+      const horaFormateada = `${hora[0]}:${hora[1]}:${hora[2].split(".")[0]}`;
+      document.getElementById('hora-peru').textContent = horaFormateada;
+    })
+    .catch(error => {
+      console.error(error);
+      document.getElementById('hora-peru').textContent = 'Error al obtener hora';
+    });
+</script>
 </div>
 <jsp:include page="footer.jsp" />
