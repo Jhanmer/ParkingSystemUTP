@@ -30,6 +30,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("usuario", resultado.getNombreCompleto());
                 session.setAttribute("rol", resultado.getRol());
                 session.setAttribute("correo", correo);
+                session.setAttribute("idUsuario", resultado.getId());
 
                 // Redireccionar según el rol, o a index.jsp
                 response.sendRedirect("index.jsp");

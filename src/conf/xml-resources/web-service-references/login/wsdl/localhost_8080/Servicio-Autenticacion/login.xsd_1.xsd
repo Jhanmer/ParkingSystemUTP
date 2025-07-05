@@ -21,6 +21,7 @@
 
 <xs:complexType name="loginResponse">
 <xs:sequence>
+<xs:element name="id" type="xs:int"/>
 <xs:element name="message" type="xs:string" minOccurs="0"/>
 <xs:element name="nombreCompleto" type="xs:string" minOccurs="0"/>
 <xs:element name="rol" type="xs:string" minOccurs="0"/>

@@ -26,22 +26,6 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-login" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/login"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/login" destdir="${build.generated.dir}/jax-wsCache/login" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/login"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/login">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-login" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/autenticacion"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/login"/>
-    </target>
     <target name="wsimport-client-ServicioListarUsuarios" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios"/>
         <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios" destdir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ServicioListarUsuarios/wsdl/localhost_8080/Servicio_ListarUsuarios/ServicioListarUsuarios.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Servicio_ListarUsuarios/ServicioListarUsuarios?wsdl" xnocompile="true" xendorsed="true">
@@ -74,5 +58,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/servicio"/>
         <delete dir="${build.generated.dir}/jax-wsCache/ServicioReservas"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-login, wsimport-client-ServicioListarUsuarios, wsimport-client-ServicioReservas"/>
+    <target name="wsimport-client-login" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/login"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/login" destdir="${build.generated.dir}/jax-wsCache/login" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/login/wsdl/localhost_8080/Servicio-Autenticacion/login.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Servicio-Autenticacion/login?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/login/wsdl/localhost_8080/Servicio-Autenticacion/login.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/login"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/login">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-login" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/autenticacion"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/login"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-ServicioListarUsuarios, wsimport-client-ServicioReservas, wsimport-client-login"/>
 </project>
