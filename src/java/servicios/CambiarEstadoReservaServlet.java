@@ -4,17 +4,17 @@ import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
-import servicio.ServicioReservas_Service;
-import servicio.ServicioReservas;
+import ws.ReservasWS;
+import ws.ReservasWS_Service;
 
 @WebServlet("/cambiarEstadoReserva")
 public class CambiarEstadoReservaServlet extends HttpServlet {
 
-    private ServicioReservas_Service servicio;
+    private ReservasWS_Service servicio;
 
     @Override
     public void init() throws ServletException {
-        servicio = new ServicioReservas_Service();
+        servicio = new ReservasWS_Service();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CambiarEstadoReservaServlet extends HttpServlet {
             int idReserva = Integer.parseInt(request.getParameter("idReserva"));
             String nuevoEstado = request.getParameter("nuevoEstado");
 
-            ServicioReservas port = servicio.getServicioReservasPort();
+            ReservasWS port = servicio.getReservasWSPort();
             boolean actualizado = port.cambiarEstadoReserva(idReserva, nuevoEstado);
 
             if (actualizado) {
@@ -33,7 +33,6 @@ public class CambiarEstadoReservaServlet extends HttpServlet {
                 System.out.println("Error al actualizar el estado.");
             }
 
-            // Redirigir nuevamente al listado
             response.sendRedirect(request.getContextPath() + "/listarReservas");
 
         } catch (Exception e) {

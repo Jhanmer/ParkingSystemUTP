@@ -5,24 +5,24 @@ import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
-import servicio.ServicioReservas_Service;
-import servicio.ServicioReservas;
-import servicio.Reserva;
+import ws.ReservasWS;
+import ws.ReservasWS_Service;
+import ws.Reserva;
 
 @WebServlet("/listarReservas")
 public class ListarReservasServlet extends HttpServlet {
 
-    private ServicioReservas_Service servicio;
+    private ReservasWS_Service servicio;
 
     @Override
     public void init() throws ServletException {
-        servicio = new ServicioReservas_Service();
+        servicio = new ReservasWS_Service();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            ServicioReservas port = servicio.getServicioReservasPort();
+            ReservasWS port = servicio.getReservasWSPort();
             List<Reserva> lista = port.listarReservas();
 
             request.setAttribute("listaReservas", lista);
