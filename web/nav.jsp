@@ -43,12 +43,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="seleccionar_parqueo.html" class="menu-link">
+                  <a href="seleccionar_parqueo.jsp" class="menu-link">
                     <div data-i18n="Account">Reservar Estacionamiento</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="VistaReservas.jsp" class="menu-link">
+                  <a href="mireserva.jsp" class="menu-link">
                     <div data-i18n="Account">Mis Reservas</div>
                   </a>
                 </li>
@@ -67,12 +67,11 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-  <a href="<%= request.getContextPath() %>/listarReservas" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-list-ul"></i>
-    <div>Listado de Reservas</div>
-  </a>
-</li>
-
+                    <a href="<%= request.getContextPath() %>/listarReservas" class="menu-link">
+                      <i class="menu-icon tf-icons bx bx-list-ul"></i>
+                      <div>Listado de Reservas</div>
+                    </a>
+                </li>
               </ul>
             </li>
             <li class="menu-item">
@@ -81,9 +80,8 @@
                     <div data-i18n="Account Settings">Estacionamientos</div>
               </a>
               <ul class="menu-sub">
-                    <li class="menu-item">
-                      <i class="menu-icon tf-icons bx bx-parking"></i>  
-                      <a href="GestionarEstacionamiento_ADM.html" class="menu-link">
+                    <li class="menu-item"> 
+                      <a href="Parqueo.jsp" class="menu-link">
                             <div data-i18n="Account">Gestión de Estacionamientos</div>
                       </a>
                     </li>
@@ -103,18 +101,18 @@
               </ul>
             </li>
             <li class="menu-item">
-  <a href="javascript:void(0);" class="menu-link menu-toggle">
-    <i class="menu-icon tf-icons bx bx-user"></i>
-    <div data-i18n="Account Settings">Usuarios</div>
-  </a>
-  <ul class="menu-sub">
-    <li class="menu-item">
-      <a href="<%= request.getContextPath() %>/listar" class="menu-link">
-        <div data-i18n="Account">Listado de Usuarios</div>
-      </a>
-    </li>
-  </ul>
-</li>
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-user"></i>
+              <div data-i18n="Account Settings">Usuarios</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="<%= request.getContextPath() %>/listar" class="menu-link">
+                  <div data-i18n="Account">Listado de Usuarios</div>
+                </a>
+              </li>
+            </ul>
+          </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
@@ -122,7 +120,7 @@
               </a>
               <ul class="menu-sub">
                     <li class="menu-item">
-                      <a href="ReportesEstadisticasADM.jsp" class="menu-link">
+                      <a href="Reportes.jsp" class="menu-link">
                             <div data-i18n="Account">Reportes y Estadísticas</div>
                       </a>
                     </li>
@@ -197,13 +195,3 @@
           </nav>
 
           <!-- / Navbar -->
-<!-- 
-<%
-Integer id = (Integer) session.getAttribute("idUsuario");
-if (id != null && id == 1) {
-    // Mostrar contenido especial para el usuario con ID 1
-}
-%>
-<a href="perfil.jsp?id=<%= session.getAttribute("idUsuario") %>">Ver mi perfil</a>
-
--->

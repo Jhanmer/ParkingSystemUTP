@@ -8,4 +8,14 @@
     <system systemId="http://localhost:8080/Servicio_ListarUsuarios/ServicioListarUsuarios?xsd=1" uri="wsdl/localhost_8080/Servicio_ListarUsuarios/ServicioListarUsuarios.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ListarReserva/ServicioReservas?wsdl" uri="wsdl/localhost_8080/ListarReserva/ServicioReservas.wsdl"/>
     <system systemId="http://localhost:8080/ListarReserva/ServicioReservas?xsd=1" uri="wsdl/localhost_8080/ListarReserva/ServicioReservas.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Servicio_Reserva/index.jsp/EstacionamientoWS?wsdl" uri="wsdl/localhost_8080/Servicio_Reserva/index.jsp/EstacionamientoWS.wsdl"/>
+    <system systemId="http://localhost:8080/Servicio_Reserva/index.jsp/EstacionamientoWS?xsd=1" uri="wsdl/localhost_8080/Servicio_Reserva/index.jsp/EstacionamientoWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Servicio_Reserva/index.jsp/ReservasWS?wsdl" uri="wsdl/localhost_8080/Servicio_Reserva/index.jsp/ReservasWS.wsdl"/>
+    <system systemId="http://localhost:8080/Servicio_Reserva/index.jsp/ReservasWS?xsd=1" uri="wsdl/localhost_8080/Servicio_Reserva/index.jsp/ReservasWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ServicioListarUsuario/ServicioListarUsuarios?wsdl" uri="wsdl/localhost_8080/ServicioListarUsuario/ServicioListarUsuarios.wsdl"/>
+    <system systemId="http://localhost:8080/ServicioListarUsuario/ServicioListarUsuarios?xsd=1" uri="wsdl/localhost_8080/ServicioListarUsuario/ServicioListarUsuarios.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ServicioListarReserva/ServicioReservas?wsdl" uri="wsdl/localhost_8080/ServicioListarReserva/ServicioReservas.wsdl"/>
+    <system systemId="http://localhost:8080/ServicioListarReserva/ServicioReservas?xsd=1" uri="wsdl/localhost_8080/ServicioListarReserva/ServicioReservas.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/Microservicio-Registro/RegistroWSService?wsdl" uri="wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.wsdl"/>
+    <system systemId="http://localhost:8080/Microservicio-Registro/RegistroWSService?xsd=1" uri="wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.xsd_1.xsd"/>
 </catalog>

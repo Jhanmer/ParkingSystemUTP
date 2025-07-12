@@ -1,2 +1,19 @@
-/build/
-/dist/
+# Ignorar carpetas de NetBeans
+nbproject/private/
+build/
+dist/
+nbbuild/
+nbdist/
+*.class
+*.log
+*.bak
+*.tmp
+*.orig
+*.rej
+
+# Archivos específicos del sistema
+.DS_Store
+Thumbs.db
+
+# Otros IDEs o herramientas (VS Code, etc.)
+.vscode/

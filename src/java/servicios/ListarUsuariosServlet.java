@@ -13,7 +13,7 @@ import servicio.Usuario;
 @WebServlet("/listar")
 public class ListarUsuariosServlet extends HttpServlet {
 
-    @WebServiceRef(wsdlLocation = "http://localhost:8080/Servicio_ListarUsuarios/ServicioListarUsuarios?wsdl")
+    @WebServiceRef(wsdlLocation = "http://localhost:8080/ServicioListarUsuario/ServicioListarUsuarios?wsdl")
     private ServicioListarUsuarios_Service servicio;
 
     @Override

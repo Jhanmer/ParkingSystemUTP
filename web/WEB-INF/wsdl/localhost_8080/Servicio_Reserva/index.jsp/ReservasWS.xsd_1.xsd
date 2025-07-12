@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://WS/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://WS/">
+
+<xs:element name="actualizarReserva" type="tns:actualizarReserva"/>
+
+<xs:element name="actualizarReservaResponse" type="tns:actualizarReservaResponse"/>
+
+<xs:element name="buscarReservaPorId" type="tns:buscarReservaPorId"/>
+
+<xs:element name="buscarReservaPorIdResponse" type="tns:buscarReservaPorIdResponse"/>
+
+<xs:element name="cambiarEstadoReserva" type="tns:cambiarEstadoReserva"/>
+
+<xs:element name="cambiarEstadoReservaResponse" type="tns:cambiarEstadoReservaResponse"/>
+
+<xs:element name="eliminarReserva" type="tns:eliminarReserva"/>
+
+<xs:element name="eliminarReservaResponse" type="tns:eliminarReservaResponse"/>
+
+<xs:element name="generarReservaAutomatica" type="tns:generarReservaAutomatica"/>
+
+<xs:element name="generarReservaAutomaticaResponse" type="tns:generarReservaAutomaticaResponse"/>
+
+<xs:element name="listarReservas" type="tns:listarReservas"/>
+
+<xs:element name="listarReservasResponse" type="tns:listarReservasResponse"/>
+
+<xs:element name="reserva" type="tns:reserva"/>
+
+<xs:complexType name="generarReservaAutomatica">
+<xs:sequence>
+<xs:element name="usuarioId" type="xs:int"/>
+<xs:element name="fecha" type="xs:string" minOccurs="0"/>
+<xs:element name="horaInicio" type="xs:string" minOccurs="0"/>
+<xs:element name="horaFin" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="generarReservaAutomaticaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:reserva" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="reserva">
+<xs:sequence>
+<xs:element name="apellidoUsuario" type="xs:string" minOccurs="0"/>
+<xs:element name="codEsta" type="xs:int"/>
+<xs:element name="estado" type="xs:string" minOccurs="0"/>
+<xs:element name="fecha" type="xs:string" minOccurs="0"/>
+<xs:element name="horaFin" type="xs:string" minOccurs="0"/>
+<xs:element name="horaInicio" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int"/>
+<xs:element name="nombreUsuario" type="xs:string" minOccurs="0"/>
+<xs:element name="numeroEstacionamiento" type="xs:string" minOccurs="0"/>
+<xs:element name="usuarioId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarReservaPorId">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarReservaPorIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:reserva" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarReserva">
+<xs:sequence>
+<xs:element name="reserva" type="tns:reserva" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarReservaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cambiarEstadoReserva">
+<xs:sequence>
+<xs:element name="idReserva" type="xs:int"/>
+<xs:element name="nuevoEstado" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cambiarEstadoReservaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listarReservas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="listarReservasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:reserva" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarReserva">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarReservaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

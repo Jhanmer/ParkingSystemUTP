@@ -20,7 +20,6 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Correo</th>
-              <th>Contraseña</th>
               <th>Rol</th>
               <th>Fecha de Registro</th>
             </tr>
@@ -36,7 +35,6 @@
               <td><%= u.getNombre() %></td>
               <td><%= u.getApellido() %></td>
               <td><%= u.getCorreo() %></td>
-              <td><%= u.getContrasena() %></td>
               <td><%= u.getRol() %></td>
               <td><%= u.getFechaRegistro() %></td>
             </tr>
