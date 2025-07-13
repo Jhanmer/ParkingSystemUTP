@@ -10,12 +10,16 @@
             <div class="col-sm-7">
               <div class="card-body">
                 <%
-                  String nombre = (String) session.getAttribute("usuario");
-                  String rol = (String) session.getAttribute("rol");
+                    String nombre = (String) session.getAttribute("usuario");
+                    String rol = (String) session.getAttribute("rol");
+                    String rolFormateado = rol != null ? rol.toUpperCase() : "USUARIO";
                 %>
-                <h5 class="card-title text-primary">Bienvenido <%= rol != null ? rol : "usuario" %> <%= nombre != null ? nombre : "" %>!</h5>
-                <p class="mb-4">
-                  Reserva tu estacionamiento. Recuerda que tenemos solo <span class="fw-bold">15 minutos</span> de tolerancia.
+                <i class="bx bx-smile text-warning me-2"></i>
+                <h4 class="card-title text-primary mb-2">
+                    ¡Bienvenido <span class="text-uppercase text-dark fw-semibold"><%= rolFormateado %></span> <span class="text-primary fw-bold"><%= nombre != null ? nombre : "" %></span>!
+                </h4>
+                <p class="mb-4 text-muted">
+                    Reserva tu estacionamiento. Recuerda que tienes solo <span class="fw-bold text-dark">15 minutos</span> de tolerancia.
                 </p>
               </div>
             </div>

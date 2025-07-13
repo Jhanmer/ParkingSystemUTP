@@ -14,8 +14,8 @@
     <system systemId="http://localhost:8080/Servicio_Reserva/index.jsp/ReservasWS?xsd=1" uri="src/conf/xml-resources/web-service-references/ReservasWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/ReservasWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ServicioListarReserva/ServicioReservas?wsdl" uri="src/conf/xml-resources/web-service-references/ServicioReservas/wsdl/localhost_8080/ServicioListarReserva/ServicioReservas.wsdl"/>
     <system systemId="http://localhost:8080/ServicioListarReserva/ServicioReservas?xsd=1" uri="src/conf/xml-resources/web-service-references/ServicioReservas/wsdl/localhost_8080/ServicioListarReserva/ServicioReservas.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?wsdl" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.wsdl"/>
-    <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?xsd=1" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/Microservicio-Registro/RegistroWSService?wsdl" uri="src/conf/xml-resources/web-service-references/RegistroWSService/wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.wsdl"/>
     <system systemId="http://localhost:8080/Microservicio-Registro/RegistroWSService?xsd=1" uri="src/conf/xml-resources/web-service-references/RegistroWSService/wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?wsdl" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.wsdl"/>
+    <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?xsd=1" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.xsd_1.xsd"/>
 </catalog>

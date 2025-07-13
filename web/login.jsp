@@ -122,7 +122,6 @@
 
                     <div class="mb-3 form-check">
                       <input class="form-check-input" type="checkbox" id="remember-me" />
-                      <label class="form-check-label" for="remember-me">Recuérdame</label>
                     </div>
                     <div class="mb-3">
                       <button class="btn btn-primary d-grid w-100" type="submit">Ingresar</button>

@@ -24,7 +24,13 @@ public class LoginServlet extends HttpServlet {
 
         try {
             LoginResponse resultado = iniciarSesion(correo, contrasena);
-
+            
+            System.out.println("Resultado desde servicio:");
+            System.out.println("Éxito: " + resultado.isSuccess());
+            System.out.println("Mensaje: " + resultado.getMessage());
+            System.out.println("Rol: " + resultado.getRol());
+            System.out.println("Nombre completo: " + resultado.getNombreCompleto());
+            
             if (resultado.isSuccess()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", resultado.getNombreCompleto());
@@ -42,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Error al conectar con el servicio de autenticación.");
+            request.setAttribute("error", "Error inesperado de autenticación.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }

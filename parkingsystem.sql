@@ -32,24 +32,25 @@ CREATE TABLE usuarios (
     correo VARCHAR(150) NOT NULL UNIQUE,
     contrasena VARCHAR(255) NOT NULL,
     rol VARCHAR(50) NOT NULL,
+    estado VARCHAR(20) NOT NULL,
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insertar usuarios de prueba
-INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol)
-VALUES ('Jhanmer', 'Paucar', 'c21213856@utp.edu.pe', '123', 'profesor');
+INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol, estado)
+VALUES ('Jhanmer', 'Paucar', 'c21213856@utp.edu.pe', '123', 'profesor', 'activo');
 
-INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol)
-VALUES ('Paolo', 'Gomez', 'u21212136@utp.edu.pe', '123', 'alumno');
+INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol, estado)
+VALUES ('Paolo', 'Gomez', 'u21212136@utp.edu.pe', '123', 'alumno', 'activo');
 
-INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol)
-VALUES ('Roberto', 'Carlos', 'rcarlos@utp.edu.pe', '123', 'admin');
+INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol, estado)
+VALUES ('Roberto', 'Carlos', 'rcarlos@utp.edu.pe', '123', 'admin','activo');
 
-INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol)
-VALUES('nico', 'Ponce', 'c22213856@utp.edu.pe', '123', 'profesor');
+INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol, estado)
+VALUES('nico', 'Ponce', 'c22213856@utp.edu.pe', '123', 'profesor','activo');
 
-INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol)
-VALUES('palma', 'palmita', 'u19212136@utp.edu.pe', '123', 'alumno');
+INSERT INTO usuarios (nombre, apellido, correo, contrasena, rol, estado)
+VALUES('palma', 'palmita', 'u19212136@utp.edu.pe', '123', 'alumno','activo');
 
 -- tabla de reservas
 CREATE TABLE reservas (

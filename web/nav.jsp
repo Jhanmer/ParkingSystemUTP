@@ -28,8 +28,6 @@
             <%
                 String rol = (String) session.getAttribute("rol");
             %>
-
-
             <!-- Layouts ALUMNO Y PROFESOR-->
             <% if ("alumno".equalsIgnoreCase(rol) || "profesor".equalsIgnoreCase(rol)) { %>
             <!-- Sección Reserva solo para alumno o profesor -->
@@ -167,19 +165,13 @@
                               <span class="fw-semibold d-block"><%= session.getAttribute("usuario") %></span>
                               <small class="text-muted d-block"><%= session.getAttribute("correo") %></small>
                               <small class="text-muted d-block"><%= session.getAttribute("rol") %></small>
-                              <small class="text-muted d-block">ID: <%= session.getAttribute("idUsuario") %></small>
+                              <input type="hidden" id="idUsuario" name="idUsuario" value="<%= session.getAttribute("idUsuario") %>" />
                             </div>
                           </div>
                         </a>
                       </li>
                     <li>
                       <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">Mi Perfil</span>
-                      </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="LogoutServlet">
