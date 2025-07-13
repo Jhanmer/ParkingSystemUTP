@@ -58,22 +58,6 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
         <delete dir="${build.generated.dir}/jax-wsCache/ReservasWS"/>
     </target>
-    <target name="wsimport-client-ServicioListarUsuarios" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios" destdir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ServicioListarUsuarios/wsdl/localhost_8080/ServicioListarUsuario/ServicioListarUsuarios.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ServicioListarUsuario/ServicioListarUsuarios?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ServicioListarUsuarios/wsdl/localhost_8080/ServicioListarUsuario/ServicioListarUsuarios.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-ServicioListarUsuarios" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/servicio"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/ServicioListarUsuarios"/>
-    </target>
     <target name="wsimport-client-ServicioReservas" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/ServicioReservas"/>
         <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ServicioReservas" destdir="${build.generated.dir}/jax-wsCache/ServicioReservas" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ServicioReservas/wsdl/localhost_8080/ServicioListarReserva/ServicioReservas.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ServicioListarReserva/ServicioReservas?wsdl" xnocompile="true" xendorsed="true">
@@ -89,22 +73,6 @@
     <target name="wsimport-client-clean-ServicioReservas" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/servicio"/>
         <delete dir="${build.generated.dir}/jax-wsCache/ServicioReservas"/>
-    </target>
-    <target name="wsimport-client-RegistroWSService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/RegistroWSService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/RegistroWSService" destdir="${build.generated.dir}/jax-wsCache/RegistroWSService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/RegistroWSService/wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Microservicio-Registro/RegistroWSService?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/RegistroWSService/wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/RegistroWSService"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/RegistroWSService">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-RegistroWSService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/RegistroWSService"/>
     </target>
     <target name="wsimport-client-login" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/login"/>
@@ -122,5 +90,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/autenticacion"/>
         <delete dir="${build.generated.dir}/jax-wsCache/login"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-EstacionamientoWS, wsimport-client-ReservasWS, wsimport-client-ServicioListarUsuarios, wsimport-client-ServicioReservas, wsimport-client-RegistroWSService, wsimport-client-login"/>
+    <target name="wsimport-client-ServicioUsuarioService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService" destdir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ServicioUsuarioService/wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ServicioUsuario/ServicioUsuarioService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ServicioUsuarioService/wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-ServicioUsuarioService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-EstacionamientoWS, wsimport-client-ReservasWS, wsimport-client-ServicioReservas, wsimport-client-login, wsimport-client-ServicioUsuarioService"/>
 </project>

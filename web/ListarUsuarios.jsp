@@ -1,6 +1,6 @@
+<%@page import="ws.Usuario"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.util.List"%>
-<%@page import="servicio.Usuario"%>
 
 <jsp:include page="nav.jsp" />
 

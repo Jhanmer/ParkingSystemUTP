@@ -18,4 +18,6 @@
     <system systemId="http://localhost:8080/Microservicio-Registro/RegistroWSService?xsd=1" uri="src/conf/xml-resources/web-service-references/RegistroWSService/wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?wsdl" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.wsdl"/>
     <system systemId="http://localhost:8080/ServicioAutenticacion-ParkingSystem/login?xsd=1" uri="src/conf/xml-resources/web-service-references/login/wsdl/localhost_8080/ServicioAutenticacion-ParkingSystem/login.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ServicioUsuario/ServicioUsuarioService?wsdl" uri="src/conf/xml-resources/web-service-references/ServicioUsuarioService/wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.wsdl"/>
+    <system systemId="http://localhost:8080/ServicioUsuario/ServicioUsuarioService?xsd=1" uri="src/conf/xml-resources/web-service-references/ServicioUsuarioService/wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.xsd_1.xsd"/>
 </catalog>

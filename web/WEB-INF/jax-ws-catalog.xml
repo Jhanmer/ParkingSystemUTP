@@ -18,4 +18,6 @@
     <system systemId="http://localhost:8080/ServicioListarReserva/ServicioReservas?xsd=1" uri="wsdl/localhost_8080/ServicioListarReserva/ServicioReservas.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/Microservicio-Registro/RegistroWSService?wsdl" uri="wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.wsdl"/>
     <system systemId="http://localhost:8080/Microservicio-Registro/RegistroWSService?xsd=1" uri="wsdl/localhost_8080/Microservicio-Registro/RegistroWSService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ServicioUsuario/ServicioUsuarioService?wsdl" uri="wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.wsdl"/>
+    <system systemId="http://localhost:8080/ServicioUsuario/ServicioUsuarioService?xsd=1" uri="wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.xsd_1.xsd"/>
 </catalog>
