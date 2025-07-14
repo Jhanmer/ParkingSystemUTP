@@ -74,3 +74,135 @@ INSERT INTO `reservas` (`id`, `usuario_id`, `codEsta`, `fecha`, `hora_inicio`, `
 (4, 4, 5, '2025-07-03', '11:00:00', '12:00:00', 'reservada'),
 (5, 5, 4, '2025-07-03', '12:00:00', '13:00:00', 'reservada'),
 (6, 1, 2, '2025-07-03', '08:00:00', '09:00:00', 'reservada');
+
+
+
+
+----
+
+CREATE TABLE horarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNSIGNED NOT NULL,
+    dia_semana ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME NOT NULL,
+    clase VARCHAR(100) NOT NULL,
+    aula VARCHAR(50),
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+
+
+-- =========================
+-- HORARIOS ALUMNO ID = 2
+-- =========================
+INSERT INTO horarios (usuario_id, dia_semana, hora_inicio, hora_fin, clase, aula) VALUES
+-- Lunes
+(2, 'Lunes', '08:00:00', '09:30:00', 'Cálculo I', 'Aula 101'),
+(2, 'Lunes', '09:45:00', '11:15:00', 'Introducción a la Ingeniería', 'Aula 102'),
+(2, 'Lunes', '15:00:00', '16:30:00', 'Comunicación Oral', 'Aula 201'),
+-- Martes
+(2, 'Martes', '08:00:00', '09:30:00', 'Cálculo I - Laboratorio', 'Lab. Matemáticas'),
+(2, 'Martes', '11:30:00', '13:00:00', 'Taller de Liderazgo', 'Aula 105'),
+-- Miércoles
+(2, 'Miércoles', '09:00:00', '10:30:00', 'Fundamentos de Física', 'Aula 202'),
+-- Jueves
+(2, 'Jueves', '13:00:00', '14:30:00', 'Cultura Ambiental', 'Aula 303'),
+-- Viernes
+(2, 'Viernes', '10:00:00', '11:30:00', 'Ética Profesional', 'Aula 306');
+
+-- =========================
+-- HORARIOS ALUMNO ID = 5
+-- =========================
+INSERT INTO horarios (usuario_id, dia_semana, hora_inicio, hora_fin, clase, aula) VALUES
+-- Lunes
+(5, 'Lunes', '10:00:00', '11:30:00', 'Algoritmos y Estructuras', 'Aula 204'),
+(5, 'Lunes', '14:00:00', '15:30:00', 'Matemática Discreta', 'Aula 109'),
+-- Martes
+(5, 'Martes', '08:00:00', '09:30:00', 'Historia del Perú', 'Aula 201'),
+(5, 'Martes', '10:00:00', '11:30:00', 'Inglés Técnico', 'Aula 210'),
+-- Miércoles
+(5, 'Miércoles', '09:00:00', '10:30:00', 'Algoritmos - Laboratorio', 'Lab. Computación'),
+-- Jueves
+(5, 'Jueves', '14:00:00', '15:30:00', 'Desarrollo Personal', 'Aula 105'),
+-- Viernes
+(5, 'Viernes', '08:00:00', '09:30:00', 'Lógica Matemática', 'Aula 104');
+
+-- =========================
+-- HORARIOS ALUMNO ID = 6
+-- =========================
+INSERT INTO horarios (usuario_id, dia_semana, hora_inicio, hora_fin, clase, aula) VALUES
+-- Lunes
+(6, 'Lunes', '08:00:00', '09:30:00', 'Física General', 'Aula 203'),
+(6, 'Lunes', '09:45:00', '11:15:00', 'Estadística I', 'Aula 208'),
+-- Martes
+(6, 'Martes', '13:00:00', '14:30:00', 'Introducción a la Programación', 'Aula 204'),
+-- Miércoles
+(6, 'Miércoles', '08:00:00', '09:30:00', 'Estadística - Laboratorio', 'Lab. Estadística'),
+-- Jueves
+(6, 'Jueves', '11:00:00', '12:30:00', 'Redacción Académica', 'Aula 110'),
+(6, 'Jueves', '13:00:00', '14:30:00', 'Metodología de Investigación', 'Aula 207'),
+-- Viernes
+(6, 'Viernes', '14:00:00', '15:30:00', 'Filosofía', 'Aula 101');
+
+
+CREATE TABLE puntos_alumno (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT UNSIGNED NOT NULL,
+    total_puntos DECIMAL(5,2) DEFAULT 0,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+
+####################POR ALUMNO:
+
+SELECT ROUND(SUM(TIMESTAMPDIFF(MINUTE, h.hora_inicio, h.hora_fin) / 90), 2) AS puntos_lunes FROM horarios h WHERE h.usuario_id = 2 AND h.dia_semana = 'Lunes';
+
+####################Por hora del sistema (pero hoy)
+
+SELECT 
+    h.usuario_id,
+    h.clase,
+    h.hora_inicio,
+    h.hora_fin,
+    ROUND(TIMESTAMPDIFF(MINUTE, h.hora_inicio, h.hora_fin) / 90, 2) AS puntos_en_curso
+FROM horarios h
+WHERE 
+    h.dia_semana = CASE DAYOFWEEK(CURDATE())
+        WHEN 1 THEN 'Domingo'
+        WHEN 2 THEN 'Lunes'
+        WHEN 3 THEN 'Martes'
+        WHEN 4 THEN 'Miércoles'
+        WHEN 5 THEN 'Jueves'
+        WHEN 6 THEN 'Viernes'
+        WHEN 7 THEN 'Sábado'
+    END
+    AND CURTIME() BETWEEN h.hora_inicio AND h.hora_fin;
+
+
+####################Los puntos de dia de mañana del alumno = 2
+
+SELECT 
+    h.usuario_id,
+    ROUND(SUM(TIMESTAMPDIFF(MINUTE, h.hora_inicio, h.hora_fin) / 90), 2) AS puntos_manana
+FROM horarios h
+WHERE 
+    h.dia_semana = CASE DAYOFWEEK(DATE_ADD(CURDATE(), INTERVAL 1 DAY))
+        WHEN 1 THEN 'Domingo'
+        WHEN 2 THEN 'Lunes'
+        WHEN 3 THEN 'Martes'
+        WHEN 4 THEN 'Miércoles'
+        WHEN 5 THEN 'Jueves'
+        WHEN 6 THEN 'Viernes'
+        WHEN 7 THEN 'Sábado'
+    END
+    AND h.usuario_id = 2  -- aquí va el ID del alumno logueado
+GROUP BY h.usuario_id;
+
+
+
+
