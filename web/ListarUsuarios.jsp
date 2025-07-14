@@ -22,6 +22,8 @@
               <th>Correo</th>
               <th>Rol</th>
               <th>Fecha de Registro</th>
+              <th>Estado</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -37,13 +39,25 @@
               <td><%= u.getCorreo() %></td>
               <td><%= u.getRol() %></td>
               <td><%= u.getFechaRegistro() %></td>
+              <td><%= u.getEstado() %></td>
+              <td>
+                <form action="cambiarEstadoUsuario" method="post" style="display: flex; gap: 5px;">
+                  <input type="hidden" name="idUsuario" value="<%= u.getId() %>">
+                  <select name="nuevoEstado" class="form-select" style="width: 130px;">
+                    <option value="activo" <%= u.getEstado().equalsIgnoreCase("activo") ? "selected" : "" %>>Activo</option>
+                    <option value="bloqueado" <%= u.getEstado().equalsIgnoreCase("bloqueado") ? "selected" : "" %>>Bloqueado</option>
+                    <option value="inactivo" <%= u.getEstado().equalsIgnoreCase("inactivo") ? "selected" : "" %>>Inactivo</option>
+                  </select>
+                  <button type="submit" class="btn btn-primary btn-sm">Cambiar</button>
+                </form>
+              </td>
             </tr>
             <%
                   }
               } else {
             %>
             <tr>
-              <td colspan="7" class="text-center">No hay usuarios registrados</td>
+              <td colspan="8" class="text-center">No hay usuarios registrados</td>
             </tr>
             <%
               }

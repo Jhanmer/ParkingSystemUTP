@@ -10,23 +10,11 @@
 <message name="listarReservasResponse">
 <part name="parameters" element="tns:listarReservasResponse"/>
 </message>
-<message name="cambiarEstadoReserva">
-<part name="parameters" element="tns:cambiarEstadoReserva"/>
-</message>
-<message name="cambiarEstadoReservaResponse">
-<part name="parameters" element="tns:cambiarEstadoReservaResponse"/>
-</message>
 <message name="eliminarReserva">
 <part name="parameters" element="tns:eliminarReserva"/>
 </message>
 <message name="eliminarReservaResponse">
 <part name="parameters" element="tns:eliminarReservaResponse"/>
-</message>
-<message name="generarReservaAutomatica">
-<part name="parameters" element="tns:generarReservaAutomatica"/>
-</message>
-<message name="generarReservaAutomaticaResponse">
-<part name="parameters" element="tns:generarReservaAutomaticaResponse"/>
 </message>
 <message name="buscarReservaPorId">
 <part name="parameters" element="tns:buscarReservaPorId"/>
@@ -34,36 +22,48 @@
 <message name="buscarReservaPorIdResponse">
 <part name="parameters" element="tns:buscarReservaPorIdResponse"/>
 </message>
+<message name="generarReservaAutomatica">
+<part name="parameters" element="tns:generarReservaAutomatica"/>
+</message>
+<message name="generarReservaAutomaticaResponse">
+<part name="parameters" element="tns:generarReservaAutomaticaResponse"/>
+</message>
 <message name="actualizarReserva">
 <part name="parameters" element="tns:actualizarReserva"/>
 </message>
 <message name="actualizarReservaResponse">
 <part name="parameters" element="tns:actualizarReservaResponse"/>
 </message>
+<message name="cambiarEstadoReserva">
+<part name="parameters" element="tns:cambiarEstadoReserva"/>
+</message>
+<message name="cambiarEstadoReservaResponse">
+<part name="parameters" element="tns:cambiarEstadoReservaResponse"/>
+</message>
 <portType name="ReservasWS">
 <operation name="listarReservas">
 <input wsam:Action="http://WS/ReservasWS/listarReservasRequest" message="tns:listarReservas"/>
 <output wsam:Action="http://WS/ReservasWS/listarReservasResponse" message="tns:listarReservasResponse"/>
 </operation>
-<operation name="cambiarEstadoReserva">
-<input wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaRequest" message="tns:cambiarEstadoReserva"/>
-<output wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaResponse" message="tns:cambiarEstadoReservaResponse"/>
-</operation>
 <operation name="eliminarReserva">
 <input wsam:Action="http://WS/ReservasWS/eliminarReservaRequest" message="tns:eliminarReserva"/>
 <output wsam:Action="http://WS/ReservasWS/eliminarReservaResponse" message="tns:eliminarReservaResponse"/>
-</operation>
-<operation name="generarReservaAutomatica">
-<input wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaRequest" message="tns:generarReservaAutomatica"/>
-<output wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaResponse" message="tns:generarReservaAutomaticaResponse"/>
 </operation>
 <operation name="buscarReservaPorId">
 <input wsam:Action="http://WS/ReservasWS/buscarReservaPorIdRequest" message="tns:buscarReservaPorId"/>
 <output wsam:Action="http://WS/ReservasWS/buscarReservaPorIdResponse" message="tns:buscarReservaPorIdResponse"/>
 </operation>
+<operation name="generarReservaAutomatica">
+<input wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaRequest" message="tns:generarReservaAutomatica"/>
+<output wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaResponse" message="tns:generarReservaAutomaticaResponse"/>
+</operation>
 <operation name="actualizarReserva">
 <input wsam:Action="http://WS/ReservasWS/actualizarReservaRequest" message="tns:actualizarReserva"/>
 <output wsam:Action="http://WS/ReservasWS/actualizarReservaResponse" message="tns:actualizarReservaResponse"/>
+</operation>
+<operation name="cambiarEstadoReserva">
+<input wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaRequest" message="tns:cambiarEstadoReserva"/>
+<output wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaResponse" message="tns:cambiarEstadoReservaResponse"/>
 </operation>
 </portType>
 <binding name="ReservasWSPortBinding" type="tns:ReservasWS">
@@ -77,25 +77,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="cambiarEstadoReserva">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="eliminarReserva">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="generarReservaAutomatica">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -113,7 +95,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="generarReservaAutomatica">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="actualizarReserva">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="cambiarEstadoReserva">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
