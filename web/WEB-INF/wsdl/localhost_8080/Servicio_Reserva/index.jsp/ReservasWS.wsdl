@@ -4,6 +4,12 @@
 <xsd:import namespace="http://WS/" schemaLocation="http://localhost:8080/Servicio_Reserva/index.jsp/ReservasWS?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="cambiarEstadoReserva">
+<part name="parameters" element="tns:cambiarEstadoReserva"/>
+</message>
+<message name="cambiarEstadoReservaResponse">
+<part name="parameters" element="tns:cambiarEstadoReservaResponse"/>
+</message>
 <message name="listarReservas">
 <part name="parameters" element="tns:listarReservas"/>
 </message>
@@ -16,17 +22,17 @@
 <message name="eliminarReservaResponse">
 <part name="parameters" element="tns:eliminarReservaResponse"/>
 </message>
-<message name="buscarReservaPorId">
-<part name="parameters" element="tns:buscarReservaPorId"/>
-</message>
-<message name="buscarReservaPorIdResponse">
-<part name="parameters" element="tns:buscarReservaPorIdResponse"/>
-</message>
 <message name="generarReservaAutomatica">
 <part name="parameters" element="tns:generarReservaAutomatica"/>
 </message>
 <message name="generarReservaAutomaticaResponse">
 <part name="parameters" element="tns:generarReservaAutomaticaResponse"/>
+</message>
+<message name="obtenerPuntosPorDia">
+<part name="parameters" element="tns:obtenerPuntosPorDia"/>
+</message>
+<message name="obtenerPuntosPorDiaResponse">
+<part name="parameters" element="tns:obtenerPuntosPorDiaResponse"/>
 </message>
 <message name="actualizarReserva">
 <part name="parameters" element="tns:actualizarReserva"/>
@@ -34,13 +40,23 @@
 <message name="actualizarReservaResponse">
 <part name="parameters" element="tns:actualizarReservaResponse"/>
 </message>
-<message name="cambiarEstadoReserva">
-<part name="parameters" element="tns:cambiarEstadoReserva"/>
+<message name="buscarReservaPorId">
+<part name="parameters" element="tns:buscarReservaPorId"/>
 </message>
-<message name="cambiarEstadoReservaResponse">
-<part name="parameters" element="tns:cambiarEstadoReservaResponse"/>
+<message name="buscarReservaPorIdResponse">
+<part name="parameters" element="tns:buscarReservaPorIdResponse"/>
+</message>
+<message name="obtenerSaldoPuntosUsuario">
+<part name="parameters" element="tns:obtenerSaldoPuntosUsuario"/>
+</message>
+<message name="obtenerSaldoPuntosUsuarioResponse">
+<part name="parameters" element="tns:obtenerSaldoPuntosUsuarioResponse"/>
 </message>
 <portType name="ReservasWS">
+<operation name="cambiarEstadoReserva">
+<input wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaRequest" message="tns:cambiarEstadoReserva"/>
+<output wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaResponse" message="tns:cambiarEstadoReservaResponse"/>
+</operation>
 <operation name="listarReservas">
 <input wsam:Action="http://WS/ReservasWS/listarReservasRequest" message="tns:listarReservas"/>
 <output wsam:Action="http://WS/ReservasWS/listarReservasResponse" message="tns:listarReservasResponse"/>
@@ -49,25 +65,38 @@
 <input wsam:Action="http://WS/ReservasWS/eliminarReservaRequest" message="tns:eliminarReserva"/>
 <output wsam:Action="http://WS/ReservasWS/eliminarReservaResponse" message="tns:eliminarReservaResponse"/>
 </operation>
-<operation name="buscarReservaPorId">
-<input wsam:Action="http://WS/ReservasWS/buscarReservaPorIdRequest" message="tns:buscarReservaPorId"/>
-<output wsam:Action="http://WS/ReservasWS/buscarReservaPorIdResponse" message="tns:buscarReservaPorIdResponse"/>
-</operation>
 <operation name="generarReservaAutomatica">
 <input wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaRequest" message="tns:generarReservaAutomatica"/>
 <output wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaResponse" message="tns:generarReservaAutomaticaResponse"/>
+</operation>
+<operation name="obtenerPuntosPorDia">
+<input wsam:Action="http://WS/ReservasWS/obtenerPuntosPorDiaRequest" message="tns:obtenerPuntosPorDia"/>
+<output wsam:Action="http://WS/ReservasWS/obtenerPuntosPorDiaResponse" message="tns:obtenerPuntosPorDiaResponse"/>
 </operation>
 <operation name="actualizarReserva">
 <input wsam:Action="http://WS/ReservasWS/actualizarReservaRequest" message="tns:actualizarReserva"/>
 <output wsam:Action="http://WS/ReservasWS/actualizarReservaResponse" message="tns:actualizarReservaResponse"/>
 </operation>
-<operation name="cambiarEstadoReserva">
-<input wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaRequest" message="tns:cambiarEstadoReserva"/>
-<output wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaResponse" message="tns:cambiarEstadoReservaResponse"/>
+<operation name="buscarReservaPorId">
+<input wsam:Action="http://WS/ReservasWS/buscarReservaPorIdRequest" message="tns:buscarReservaPorId"/>
+<output wsam:Action="http://WS/ReservasWS/buscarReservaPorIdResponse" message="tns:buscarReservaPorIdResponse"/>
+</operation>
+<operation name="obtenerSaldoPuntosUsuario">
+<input wsam:Action="http://WS/ReservasWS/obtenerSaldoPuntosUsuarioRequest" message="tns:obtenerSaldoPuntosUsuario"/>
+<output wsam:Action="http://WS/ReservasWS/obtenerSaldoPuntosUsuarioResponse" message="tns:obtenerSaldoPuntosUsuarioResponse"/>
 </operation>
 </portType>
 <binding name="ReservasWSPortBinding" type="tns:ReservasWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="cambiarEstadoReserva">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="listarReservas">
 <soap:operation soapAction=""/>
 <input>
@@ -86,7 +115,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="buscarReservaPorId">
+<operation name="generarReservaAutomatica">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -95,7 +124,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="generarReservaAutomatica">
+<operation name="obtenerPuntosPorDia">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -113,7 +142,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="cambiarEstadoReserva">
+<operation name="buscarReservaPorId">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="obtenerSaldoPuntosUsuario">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

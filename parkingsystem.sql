@@ -76,14 +76,12 @@ INSERT INTO `reservas` (`id`, `usuario_id`, `codEsta`, `fecha`, `hora_inicio`, `
 (6, 1, 2, '2025-07-03', '08:00:00', '09:00:00', 'reservada');
 
 
-
-
 ----
 
 CREATE TABLE horarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT UNSIGNED NOT NULL,
-    dia_semana ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,
+    dia_semana ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo') NOT NULL,
     hora_inicio TIME NOT NULL,
     hora_fin TIME NOT NULL,
     clase VARCHAR(100) NOT NULL,
@@ -106,8 +104,8 @@ INSERT INTO horarios (usuario_id, dia_semana, hora_inicio, hora_fin, clase, aula
 -- Martes
 (2, 'Martes', '08:00:00', '09:30:00', 'Cálculo I - Laboratorio', 'Lab. Matemáticas'),
 (2, 'Martes', '11:30:00', '13:00:00', 'Taller de Liderazgo', 'Aula 105'),
--- Miércoles
-(2, 'Miércoles', '09:00:00', '10:30:00', 'Fundamentos de Física', 'Aula 202'),
+-- Miercoles
+(2, 'Miercoles', '09:00:00', '10:30:00', 'Fundamentos de Física', 'Aula 202'),
 -- Jueves
 (2, 'Jueves', '13:00:00', '14:30:00', 'Cultura Ambiental', 'Aula 303'),
 -- Viernes
@@ -123,8 +121,8 @@ INSERT INTO horarios (usuario_id, dia_semana, hora_inicio, hora_fin, clase, aula
 -- Martes
 (5, 'Martes', '08:00:00', '09:30:00', 'Historia del Perú', 'Aula 201'),
 (5, 'Martes', '10:00:00', '11:30:00', 'Inglés Técnico', 'Aula 210'),
--- Miércoles
-(5, 'Miércoles', '09:00:00', '10:30:00', 'Algoritmos - Laboratorio', 'Lab. Computación'),
+-- Miercoles
+(5, 'Miercoles', '09:00:00', '10:30:00', 'Algoritmos - Laboratorio', 'Lab. Computación'),
 -- Jueves
 (5, 'Jueves', '14:00:00', '15:30:00', 'Desarrollo Personal', 'Aula 105'),
 -- Viernes
@@ -140,7 +138,7 @@ INSERT INTO horarios (usuario_id, dia_semana, hora_inicio, hora_fin, clase, aula
 -- Martes
 (6, 'Martes', '13:00:00', '14:30:00', 'Introducción a la Programación', 'Aula 204'),
 -- Miércoles
-(6, 'Miércoles', '08:00:00', '09:30:00', 'Estadística - Laboratorio', 'Lab. Estadística'),
+(6, 'Miercoles', '08:00:00', '09:30:00', 'Estadística - Laboratorio', 'Lab. Estadística'),
 -- Jueves
 (6, 'Jueves', '11:00:00', '12:30:00', 'Redacción Académica', 'Aula 110'),
 (6, 'Jueves', '13:00:00', '14:30:00', 'Metodología de Investigación', 'Aula 207'),
@@ -206,3 +204,19 @@ GROUP BY h.usuario_id;
 
 
 
+-- cargar datos al usuario dia jueves
+
+ALTER TABLE usuarios ADD COLUMN puntos INT DEFAULT 0;
+
+UPDATE usuarios u
+SET u.puntos = (
+    SELECT SUM(TIMESTAMPDIFF(MINUTE, h.hora_inicio, h.hora_fin) / 90) -- Calcula puntos basados en 90 min por cada clase
+    FROM horarios h
+    WHERE h.usuario_id = u.id
+    AND h.dia_semana = 'Jueves' -- **CAMBIO CLAVE: Usa dia_semana en lugar de fecha**
+)
+WHERE EXISTS (
+    SELECT 1
+    FROM horarios h
+    WHERE h.usuario_id = u.id AND h.dia_semana = 'Jueves' -- **CAMBIO CLAVE aquí también**
+);

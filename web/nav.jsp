@@ -41,10 +41,10 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="seleccionar_parqueo.jsp" class="menu-link">
-                    <div data-i18n="Account">Reservar Estacionamiento</div>
-                  </a>
-                </li>
+                <a href="ReservaVistaServlet" class="menu-link">
+                  <div data-i18n="Account">Reservar Estacionamiento</div>
+                </a>
+              </li>
                 <li class="menu-item">
                   <a href="mireserva.jsp" class="menu-link">
                     <div data-i18n="Account">Mis Reservas</div>

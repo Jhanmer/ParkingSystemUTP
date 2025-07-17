@@ -3,22 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/web/login.jsp</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/web/index.jsp</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/ListarReservasServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/CambiarEstadoReservaServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/LoginServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/ListarUsuariosServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/ConsultaPlacaServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/web/ListarUsuarios.jsp</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/web/registro.jsp</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/HoraPeruServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/conf/xml-resources/web-service-references/ServicioUsuarioService/wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.wsdl</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/LogoutServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/src/java/servicios/RegistroServlet.java</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/web/WEB-INF/jax-ws-catalog.xml</file>
-            <file>file:/C:/Users/Acer/Documents/GitHub/ParkingSystemUTP/web/Parqueo.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/seleccionar_parqueo.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/ReservarServlet.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/vehiculo.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/login.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/confirmacionReserva.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/mireserva.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/ReservaVistaServlet.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/nav.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/CambiarEstadoUsuarioServlet.java</file>
         </group>
     </open-files>
 </project-private>
