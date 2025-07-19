@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import ws.Reserva;
 import ws.ReservasWS;
 import ws.ReservasWS_Service;
-import ws.Usuario;
 
 @WebServlet("/MiReservaServlet")
 public class MiReservaServlet extends HttpServlet {
@@ -29,14 +28,12 @@ public class MiReservaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
-            Usuario usuario = (Usuario) session.getAttribute("usuario");
+            Integer usuarioId = (Integer) session.getAttribute("idUsuario");
 
-            if (usuario  == null) {
+            if (usuarioId == null) {
                 response.sendRedirect("login.jsp"); // O maneja el caso de sesión expirada
                 return;
-            }
-            
-             int usuarioId = usuario.getId(); 
+            } 
             
             ReservasWS port = servicio.getReservasWSPort();
             List<Reserva> historialReservas = port.listarHistorialReservasPorUsuario(usuarioId);

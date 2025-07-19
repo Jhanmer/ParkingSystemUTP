@@ -15,7 +15,12 @@
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-primary">Hola !</h5>
+                          <h5 class="card-title text-primary">¡Hola 
+                              <% 
+                                  String nombreUsuario = (String) session.getAttribute("usuario");
+                                  out.print(nombreUsuario != null ? nombreUsuario : "Usuario"); 
+                              %>!
+                          </h5>
                           
                           <p class="mb-4">
                               Recuerda que la <span class="fw-bold">puntualidad</span> es una muestra de respeto hacia los demás.
@@ -26,11 +31,25 @@
                               <img src="assets/img/icons/unicons/chart-success.png" alt="Credit Card" class="rounded">
                             </div>
                           </div>
-                          <span class="d-block mb-1">Tu Reserva de Estacionamiento es:</span>
-                          <h3 class="card-title text-nowrap mb-2">Hoy 05 de Junio</h3>
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                          </div>
-                          <h3 class="card-title text-nowrap mb-2">08:15 p.m. a 09:15 p.m.</h3>
+                          
+                          <c:choose>
+                              <c:when test="${not empty historialReservas && historialReservas.size() > 0}">
+                                  <c:set var="ultimaReserva" value="${historialReservas[0]}" />
+                                  <c:if test="${ultimaReserva.estado eq 'reservada'}">
+                                      <span class="d-block mb-1">Tu Reserva de Estacionamiento es:</span>
+                                      <h3 class="card-title text-nowrap mb-2">${ultimaReserva.fecha}</h3>
+                                      <h3 class="card-title text-nowrap mb-2">${ultimaReserva.horaInicio} - ${ultimaReserva.horaFin}</h3>
+                                  </c:if>
+                                  <c:if test="${ultimaReserva.estado ne 'reservada'}">
+                                      <span class="d-block mb-1">No tienes reservas activas</span>
+                                      <h3 class="card-title text-nowrap mb-2">¡Haz tu próxima reserva!</h3>
+                                  </c:if>
+                              </c:when>
+                              <c:otherwise>
+                                  <span class="d-block mb-1">No tienes reservas registradas</span>
+                                  <h3 class="card-title text-nowrap mb-2">¡Haz tu primera reserva!</h3>
+                              </c:otherwise>
+                          </c:choose>
                         </div>
                           
                         </div>
@@ -39,14 +58,38 @@
                         <div class="card-body pb-0 px-0 px-md-4">
                           <img src="assets/img/illustrations/carro_reserva.jpg" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png">
                           <div class="card-body">
-                            <div class="text-light small fw-semibold mb-1">Tiempo</div>
-                            <div class="progress mb-3">
-                              <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                    2 horas y 30 minutos
-                            </div>
-                                
-                            </div>
-                            <span class="badge rounded-pill bg-success">Estas ocupado el estacionamiento: B5</span>
+                            <c:choose>
+                                <c:when test="${not empty historialReservas && historialReservas.size() > 0}">
+                                    <c:set var="ultimaReserva" value="${historialReservas[0]}" />
+                                    <c:if test="${ultimaReserva.estado eq 'reservada'}">
+                                        <div class="text-light small fw-semibold mb-1">Estado de Reserva</div>
+                                        <div class="progress mb-3">
+                                          <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                                Reserva Activa
+                                        </div>
+                                        </div>
+                                        <span class="badge rounded-pill bg-success">Estás reservando el estacionamiento: ${ultimaReserva.numeroEstacionamiento}</span>
+                                    </c:if>
+                                    <c:if test="${ultimaReserva.estado ne 'reservada'}">
+                                        <div class="text-light small fw-semibold mb-1">Estado</div>
+                                        <div class="progress mb-3">
+                                          <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                Sin reservas activas
+                                        </div>
+                                        </div>
+                                        <span class="badge rounded-pill bg-secondary">No hay estacionamiento reservado</span>
+                                    </c:if>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="text-light small fw-semibold mb-1">Estado</div>
+                                    <div class="progress mb-3">
+                                      <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                            Sin reservas
+                                    </div>
+                                    </div>
+                                    <span class="badge rounded-pill bg-secondary">No hay estacionamiento reservado</span>
+                                </c:otherwise>
+                            </c:choose>
                           </div>
                         </div>
                       </div>
@@ -91,11 +134,11 @@
                                   <td><strong>${reserva.id}</strong></td>
                                   <td>${reserva.numeroEstacionamiento}</td>
                                   <td>${reserva.fecha}</td>
-                                  <td>${reserva.horaInicio} - ${reserva.horaFin}</td>
+                                  <td>${reserva.horaInicio}</td>
+                                  <td>${reserva.horaFin}</td>
                                   <td>
                                     <span class="badge ${estadoClase}">${reserva.estado}</span>
                                   </td>
-                                  <td hidden></td>
                                 </tr>
                               </c:forEach>
                           </c:when>

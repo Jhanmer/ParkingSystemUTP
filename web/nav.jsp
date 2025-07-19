@@ -46,7 +46,7 @@
                 </a>
               </li>
                 <li class="menu-item">
-                  <a href="mireserva.jsp" class="menu-link">
+                  <a href="MiReservaServlet" class="menu-link">
                     <div data-i18n="Account">Mis Reservas</div>
                   </a>
                 </li>
