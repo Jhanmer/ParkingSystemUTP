@@ -6,12 +6,17 @@
             <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/seleccionar_parqueo.jsp</file>
             <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/ReservarServlet.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/vehiculo.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/ListarReservasServlet.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/login.jsp</file>
-            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/confirmacionReserva.jsp</file>
             <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/mireserva.jsp</file>
-            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/ReservaVistaServlet.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/nav.jsp</file>
             <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/CambiarEstadoUsuarioServlet.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/util/Conexion.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/confirmacionReserva.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/ListarEstacionamientosServlet.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/src/java/servicios/ReservaVistaServlet.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/ListadoReservas.jsp</file>
+            <file>file:/C:/Users/ADMIN/Desktop/Proyecto%20SOA/version%202/ParkingSystemUTP/web/Parqueo.jsp</file>
         </group>
     </open-files>
 </project-private>

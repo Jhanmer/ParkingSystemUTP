@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@page import="java.util.List"%>
 
 <jsp:include page="nav.jsp" />
@@ -58,106 +59,54 @@
                 <div class="table-responsive text-nowrap">
                   <table class="table">
                     <thead>
-                      <tr>
-                        <th>Número de Reserva</th>
-                        <th>Lugar Estacionamiento</th>
-                        <th>Fecha de Reserva</th>
-                        <th>Estado</th>
-                        <th hidden>Actions</th>
-                      </tr>
-                    </thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Estacionamiento</th>
+                          <th>Fecha</th>
+                          <th>Hora Inicio</th>
+                          <th>Hora Fin</th>
+                          <th>Estado</th>
+                        </tr>
+                      </thead>
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>004</strong></td>
-                        <td>B5</td>
-                        <td>30/05/2025
-                        </td>
-                        <td><span class="badge bg-label-primary me-1">Active</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>003</strong></td>
-                        <td>B10</td>
-                        <td>25/05/2025
-                        </td>
-                        <td><span class="badge bg-label-success me-1">FINALIZADO</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>002</strong></td>
-                        <td>C15</td>
-                        <td>15/05/2025
-                        </td>
-                        <td><span class="badge bg-label-success me-1">FINALIZADO</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>001</strong>
-                        </td>
-                        <td>C10</td>
-                        <td>10/05/2025
-                        </td>
-                        <td><span class="badge bg-label-warning me-1">CANCELADO</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
+                        <c:choose>
+                          <c:when test="${not empty historialReservas}">
+                            <c:forEach var="reserva" items="${historialReservas}">
+                                <c:choose>
+                                  <c:when test="${reserva.estado eq 'asistio'}">
+                                    <c:set var="estadoClase" value="bg-label-success" />
+                                  </c:when>
+                                  <c:when test="${reserva.estado eq 'cancelada'}">
+                                    <c:set var="estadoClase" value="bg-label-warning" />
+                                  </c:when>
+                                  <c:when test="${reserva.estado eq 'no_asistio' or reserva.estado eq 'culmino_tiempo'}">
+                                    <c:set var="estadoClase" value="bg-label-danger" />
+                                  </c:when>
+                                  <c:otherwise>
+                                    <c:set var="estadoClase" value="bg-label-secondary" />
+                                  </c:otherwise>
+                                </c:choose>
+
+                                <tr>
+                                  <td><strong>${reserva.id}</strong></td>
+                                  <td>${reserva.numeroEstacionamiento}</td>
+                                  <td>${reserva.fecha}</td>
+                                  <td>${reserva.horaInicio} - ${reserva.horaFin}</td>
+                                  <td>
+                                    <span class="badge ${estadoClase}">${reserva.estado}</span>
+                                  </td>
+                                  <td hidden></td>
+                                </tr>
+                              </c:forEach>
+                          </c:when>
+                          <c:otherwise>
+                            <tr>
+                              <td colspan="6" class="text-center">No hay historial de reservas.</td>
+                            </tr>
+                          </c:otherwise>
+                        </c:choose>
+                      </tbody>
+
                   </table>
                 </div>
               </div>

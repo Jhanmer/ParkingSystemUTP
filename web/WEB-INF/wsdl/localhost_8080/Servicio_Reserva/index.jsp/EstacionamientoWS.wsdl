@@ -4,6 +4,18 @@
 <xsd:import namespace="http://WS/" schemaLocation="http://localhost:8080/Servicio_Reserva/index.jsp/EstacionamientoWS?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="buscarEstacionamientoPorId">
+<part name="parameters" element="tns:buscarEstacionamientoPorId"/>
+</message>
+<message name="buscarEstacionamientoPorIdResponse">
+<part name="parameters" element="tns:buscarEstacionamientoPorIdResponse"/>
+</message>
+<message name="registrarEstacionamiento">
+<part name="parameters" element="tns:registrarEstacionamiento"/>
+</message>
+<message name="registrarEstacionamientoResponse">
+<part name="parameters" element="tns:registrarEstacionamientoResponse"/>
+</message>
 <message name="eliminarEstacionamiento">
 <part name="parameters" element="tns:eliminarEstacionamiento"/>
 </message>
@@ -22,19 +34,15 @@
 <message name="listarEstacionamientosResponse">
 <part name="parameters" element="tns:listarEstacionamientosResponse"/>
 </message>
-<message name="buscarEstacionamientoPorId">
-<part name="parameters" element="tns:buscarEstacionamientoPorId"/>
-</message>
-<message name="buscarEstacionamientoPorIdResponse">
-<part name="parameters" element="tns:buscarEstacionamientoPorIdResponse"/>
-</message>
-<message name="registrarEstacionamiento">
-<part name="parameters" element="tns:registrarEstacionamiento"/>
-</message>
-<message name="registrarEstacionamientoResponse">
-<part name="parameters" element="tns:registrarEstacionamientoResponse"/>
-</message>
 <portType name="EstacionamientoWS">
+<operation name="buscarEstacionamientoPorId">
+<input wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdRequest" message="tns:buscarEstacionamientoPorId"/>
+<output wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdResponse" message="tns:buscarEstacionamientoPorIdResponse"/>
+</operation>
+<operation name="registrarEstacionamiento">
+<input wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoRequest" message="tns:registrarEstacionamiento"/>
+<output wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoResponse" message="tns:registrarEstacionamientoResponse"/>
+</operation>
 <operation name="eliminarEstacionamiento">
 <input wsam:Action="http://WS/EstacionamientoWS/eliminarEstacionamientoRequest" message="tns:eliminarEstacionamiento"/>
 <output wsam:Action="http://WS/EstacionamientoWS/eliminarEstacionamientoResponse" message="tns:eliminarEstacionamientoResponse"/>
@@ -47,17 +55,27 @@
 <input wsam:Action="http://WS/EstacionamientoWS/listarEstacionamientosRequest" message="tns:listarEstacionamientos"/>
 <output wsam:Action="http://WS/EstacionamientoWS/listarEstacionamientosResponse" message="tns:listarEstacionamientosResponse"/>
 </operation>
-<operation name="buscarEstacionamientoPorId">
-<input wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdRequest" message="tns:buscarEstacionamientoPorId"/>
-<output wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdResponse" message="tns:buscarEstacionamientoPorIdResponse"/>
-</operation>
-<operation name="registrarEstacionamiento">
-<input wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoRequest" message="tns:registrarEstacionamiento"/>
-<output wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoResponse" message="tns:registrarEstacionamientoResponse"/>
-</operation>
 </portType>
 <binding name="EstacionamientoWSPortBinding" type="tns:EstacionamientoWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="buscarEstacionamientoPorId">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="registrarEstacionamiento">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="eliminarEstacionamiento">
 <soap:operation soapAction=""/>
 <input>
@@ -77,24 +95,6 @@
 </output>
 </operation>
 <operation name="listarEstacionamientos">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="buscarEstacionamientoPorId">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="registrarEstacionamiento">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

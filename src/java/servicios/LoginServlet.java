@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println("Éxito: " + resultado.isSuccess());
             System.out.println("Mensaje: " + resultado.getMessage());
             System.out.println("Rol: " + resultado.getRol());
+            System.out.println("id: " + resultado.getId());
             System.out.println("Nombre completo: " + resultado.getNombreCompleto());
             
             if (resultado.isSuccess()) {
