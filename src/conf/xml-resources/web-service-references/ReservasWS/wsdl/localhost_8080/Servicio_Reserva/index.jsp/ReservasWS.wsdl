@@ -4,29 +4,23 @@
 <xsd:import namespace="http://WS/" schemaLocation="http://localhost:8080/Servicio_Reserva/index.jsp/ReservasWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="eliminarReserva">
-<part name="parameters" element="tns:eliminarReserva"/>
-</message>
-<message name="eliminarReservaResponse">
-<part name="parameters" element="tns:eliminarReservaResponse"/>
-</message>
 <message name="generarReservaAutomatica">
 <part name="parameters" element="tns:generarReservaAutomatica"/>
 </message>
 <message name="generarReservaAutomaticaResponse">
 <part name="parameters" element="tns:generarReservaAutomaticaResponse"/>
 </message>
+<message name="cambiarEstadoReserva">
+<part name="parameters" element="tns:cambiarEstadoReserva"/>
+</message>
+<message name="cambiarEstadoReservaResponse">
+<part name="parameters" element="tns:cambiarEstadoReservaResponse"/>
+</message>
 <message name="buscarReservaPorId">
 <part name="parameters" element="tns:buscarReservaPorId"/>
 </message>
 <message name="buscarReservaPorIdResponse">
 <part name="parameters" element="tns:buscarReservaPorIdResponse"/>
-</message>
-<message name="obtenerSaldoPuntosUsuario">
-<part name="parameters" element="tns:obtenerSaldoPuntosUsuario"/>
-</message>
-<message name="obtenerSaldoPuntosUsuarioResponse">
-<part name="parameters" element="tns:obtenerSaldoPuntosUsuarioResponse"/>
 </message>
 <message name="obtenerPuntosPorDia">
 <part name="parameters" element="tns:obtenerPuntosPorDia"/>
@@ -40,6 +34,12 @@
 <message name="actualizarReservaResponse">
 <part name="parameters" element="tns:actualizarReservaResponse"/>
 </message>
+<message name="obtenerSaldoPuntosUsuario">
+<part name="parameters" element="tns:obtenerSaldoPuntosUsuario"/>
+</message>
+<message name="obtenerSaldoPuntosUsuarioResponse">
+<part name="parameters" element="tns:obtenerSaldoPuntosUsuarioResponse"/>
+</message>
 <message name="listarHistorialReservasPorUsuario">
 <part name="parameters" element="tns:listarHistorialReservasPorUsuario"/>
 </message>
@@ -52,11 +52,11 @@
 <message name="listarReservasActualesDeHoyPorUsuarioResponse">
 <part name="parameters" element="tns:listarReservasActualesDeHoyPorUsuarioResponse"/>
 </message>
-<message name="cambiarEstadoReserva">
-<part name="parameters" element="tns:cambiarEstadoReserva"/>
+<message name="eliminarReserva">
+<part name="parameters" element="tns:eliminarReserva"/>
 </message>
-<message name="cambiarEstadoReservaResponse">
-<part name="parameters" element="tns:cambiarEstadoReservaResponse"/>
+<message name="eliminarReservaResponse">
+<part name="parameters" element="tns:eliminarReservaResponse"/>
 </message>
 <message name="listarReservas">
 <part name="parameters" element="tns:listarReservas"/>
@@ -65,21 +65,17 @@
 <part name="parameters" element="tns:listarReservasResponse"/>
 </message>
 <portType name="ReservasWS">
-<operation name="eliminarReserva">
-<input wsam:Action="http://WS/ReservasWS/eliminarReservaRequest" message="tns:eliminarReserva"/>
-<output wsam:Action="http://WS/ReservasWS/eliminarReservaResponse" message="tns:eliminarReservaResponse"/>
-</operation>
 <operation name="generarReservaAutomatica">
 <input wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaRequest" message="tns:generarReservaAutomatica"/>
 <output wsam:Action="http://WS/ReservasWS/generarReservaAutomaticaResponse" message="tns:generarReservaAutomaticaResponse"/>
 </operation>
+<operation name="cambiarEstadoReserva">
+<input wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaRequest" message="tns:cambiarEstadoReserva"/>
+<output wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaResponse" message="tns:cambiarEstadoReservaResponse"/>
+</operation>
 <operation name="buscarReservaPorId">
 <input wsam:Action="http://WS/ReservasWS/buscarReservaPorIdRequest" message="tns:buscarReservaPorId"/>
 <output wsam:Action="http://WS/ReservasWS/buscarReservaPorIdResponse" message="tns:buscarReservaPorIdResponse"/>
-</operation>
-<operation name="obtenerSaldoPuntosUsuario">
-<input wsam:Action="http://WS/ReservasWS/obtenerSaldoPuntosUsuarioRequest" message="tns:obtenerSaldoPuntosUsuario"/>
-<output wsam:Action="http://WS/ReservasWS/obtenerSaldoPuntosUsuarioResponse" message="tns:obtenerSaldoPuntosUsuarioResponse"/>
 </operation>
 <operation name="obtenerPuntosPorDia">
 <input wsam:Action="http://WS/ReservasWS/obtenerPuntosPorDiaRequest" message="tns:obtenerPuntosPorDia"/>
@@ -89,6 +85,10 @@
 <input wsam:Action="http://WS/ReservasWS/actualizarReservaRequest" message="tns:actualizarReserva"/>
 <output wsam:Action="http://WS/ReservasWS/actualizarReservaResponse" message="tns:actualizarReservaResponse"/>
 </operation>
+<operation name="obtenerSaldoPuntosUsuario">
+<input wsam:Action="http://WS/ReservasWS/obtenerSaldoPuntosUsuarioRequest" message="tns:obtenerSaldoPuntosUsuario"/>
+<output wsam:Action="http://WS/ReservasWS/obtenerSaldoPuntosUsuarioResponse" message="tns:obtenerSaldoPuntosUsuarioResponse"/>
+</operation>
 <operation name="listarHistorialReservasPorUsuario">
 <input wsam:Action="http://WS/ReservasWS/listarHistorialReservasPorUsuarioRequest" message="tns:listarHistorialReservasPorUsuario"/>
 <output wsam:Action="http://WS/ReservasWS/listarHistorialReservasPorUsuarioResponse" message="tns:listarHistorialReservasPorUsuarioResponse"/>
@@ -97,9 +97,9 @@
 <input wsam:Action="http://WS/ReservasWS/listarReservasActualesDeHoyPorUsuarioRequest" message="tns:listarReservasActualesDeHoyPorUsuario"/>
 <output wsam:Action="http://WS/ReservasWS/listarReservasActualesDeHoyPorUsuarioResponse" message="tns:listarReservasActualesDeHoyPorUsuarioResponse"/>
 </operation>
-<operation name="cambiarEstadoReserva">
-<input wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaRequest" message="tns:cambiarEstadoReserva"/>
-<output wsam:Action="http://WS/ReservasWS/cambiarEstadoReservaResponse" message="tns:cambiarEstadoReservaResponse"/>
+<operation name="eliminarReserva">
+<input wsam:Action="http://WS/ReservasWS/eliminarReservaRequest" message="tns:eliminarReserva"/>
+<output wsam:Action="http://WS/ReservasWS/eliminarReservaResponse" message="tns:eliminarReservaResponse"/>
 </operation>
 <operation name="listarReservas">
 <input wsam:Action="http://WS/ReservasWS/listarReservasRequest" message="tns:listarReservas"/>
@@ -108,15 +108,6 @@
 </portType>
 <binding name="ReservasWSPortBinding" type="tns:ReservasWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="eliminarReserva">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="generarReservaAutomatica">
 <soap:operation soapAction=""/>
 <input>
@@ -126,7 +117,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="buscarReservaPorId">
+<operation name="cambiarEstadoReserva">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -135,7 +126,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="obtenerSaldoPuntosUsuario">
+<operation name="buscarReservaPorId">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -162,6 +153,15 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="obtenerSaldoPuntosUsuario">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="listarHistorialReservasPorUsuario">
 <soap:operation soapAction=""/>
 <input>
@@ -180,7 +180,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="cambiarEstadoReserva">
+<operation name="eliminarReserva">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

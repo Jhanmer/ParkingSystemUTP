@@ -1,4 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.*, ws.Estacionamiento" %>
+<%
+    // Obtener la lista de estacionamientos del request
+    List<Estacionamiento> listaEstacionamientos = (List<Estacionamiento>) request.getAttribute("listaEstacionamientos");
+    
+    // Si no hay lista, crear una lista vacía para evitar errores
+    if (listaEstacionamientos == null) {
+        listaEstacionamientos = new ArrayList<Estacionamiento>();
+    }
+%>
 <jsp:include page="nav.jsp" />
     <style>
         :root {
@@ -85,13 +95,18 @@
         .available {
             background-color: var(--available);
             color: var(--text-dark);
+            cursor: not-allowed;
             border: 1px solid #27ae60;
         }
         .occupied {
             background-color: var(--occupied);
             color: var(--text-light);
-            cursor: not-allowed;
+            cursor: pointer;
             border: 1px solid #c0392b;
+        }
+        .occupied:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
         }
         .selected {
             background-color: var(--selected);
@@ -246,102 +261,80 @@
             </div>
             <div class="parking-grid">
                 <div class="parking-rows">
-                    <div class="road">CARRIL</div>
-                    <!-- Fila 1 -->
-                    <div class="parking-row">
-                      <div class="parking-spot available" data-spot="1"><span class="spot-number">1</span></div>
-                      <div class="parking-spot available" data-spot="2"><span class="spot-number">2</span></div>
-                      <div class="parking-spot available" data-spot="3"><span class="spot-number">3</span></div>
-                      <div class="parking-spot available" data-spot="4"><span class="spot-number">4</span></div>
-                      <div class="parking-spot available" data-spot="5"><span class="spot-number">5</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="6"><span class="spot-number">6</span></div>
-                      <div class="parking-spot available" data-spot="7"><span class="spot-number">7</span></div>
-                      <div class="parking-spot available" data-spot="8"><span class="spot-number">8</span></div>
-                      <div class="parking-spot available" data-spot="9"><span class="spot-number">9</span></div>
-                      <div class="parking-spot available" data-spot="10"><span class="spot-number">10</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="11"><span class="spot-number">11</span></div>
-                      <div class="parking-spot occupied" data-spot="12"><span class="spot-number">12</span></div>
-                      <div class="parking-spot available" data-spot="13"><span class="spot-number">13</span></div>
-                      <div class="parking-spot available" data-spot="14"><span class="spot-number">14</span></div>
-                      <div class="parking-spot occupied" data-spot="15"><span class="spot-number">15</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="16"><span class="spot-number">16</span></div>
-                      <div class="parking-spot available" data-spot="17"><span class="spot-number">17</span></div>
-                      <div class="parking-spot available" data-spot="18"><span class="spot-number">18</span></div>
-                      <div class="parking-spot occupied" data-spot="19"><span class="spot-number">19</span></div>
-                      <div class="parking-spot available" data-spot="20"><span class="spot-number">20</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                    </div>
-                    <div class="road">CARRIL</div>
-                    <!-- Fila 2: 21-40 -->
-                    <div class="parking-row">
-                      <div class="parking-spot available" data-spot="21"><span class="spot-number">21</span></div>
-                      <div class="parking-spot available" data-spot="22"><span class="spot-number">22</span></div>
-                      <div class="parking-spot available" data-spot="23"><span class="spot-number">23</span></div>
-                      <div class="parking-spot available" data-spot="24"><span class="spot-number">24</span></div>
-                      <div class="parking-spot available" data-spot="25"><span class="spot-number">25</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="26"><span class="spot-number">26</span></div>
-                      <div class="parking-spot occupied" data-spot="27"><span class="spot-number">27</span></div>
-                      <div class="parking-spot available" data-spot="28"><span class="spot-number">28</span></div>
-                      <div class="parking-spot available" data-spot="29"><span class="spot-number">29</span></div>
-                      <div class="parking-spot available" data-spot="30"><span class="spot-number">30</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="31"><span class="spot-number">31</span></div>
-                      <div class="parking-spot occupied" data-spot="32"><span class="spot-number">32</span></div>
-                      <div class="parking-spot available" data-spot="33"><span class="spot-number">33</span></div>
-                      <div class="parking-spot available" data-spot="34"><span class="spot-number">34</span></div>
-                      <div class="parking-spot occupied" data-spot="35"><span class="spot-number">35</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="36"><span class="spot-number">36</span></div>
-                      <div class="parking-spot occupied" data-spot="37"><span class="spot-number">37</span></div>
-                      <div class="parking-spot available" data-spot="38"><span class="spot-number">38</span></div>
-                      <div class="parking-spot occupied" data-spot="39"><span class="spot-number">39</span></div>
-                      <div class="parking-spot available" data-spot="40"><span class="spot-number">40</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                    </div>
-                    <div class="road">CARRIL</div>
-                    <!-- Fila 3: 41-60 -->
-                    <div class="parking-row">
-                      <div class="parking-spot available" data-spot="41"><span class="spot-number">41</span></div>
-                      <div class="parking-spot available" data-spot="42"><span class="spot-number">42</span></div>
-                      <div class="parking-spot occupied" data-spot="43"><span class="spot-number">43</span></div>
-                      <div class="parking-spot available" data-spot="44"><span class="spot-number">44</span></div>
-                      <div class="parking-spot available" data-spot="45"><span class="spot-number">45</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="46"><span class="spot-number">46</span></div>
-                      <div class="parking-spot available" data-spot="47"><span class="spot-number">47</span></div>
-                      <div class="parking-spot available" data-spot="48"><span class="spot-number">48</span></div>
-                      <div class="parking-spot available" data-spot="49"><span class="spot-number">49</span></div>
-                      <div class="parking-spot available" data-spot="50"><span class="spot-number">50</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="51"><span class="spot-number">51</span></div>
-                      <div class="parking-spot occupied" data-spot="52"><span class="spot-number">52</span></div>
-                      <div class="parking-spot occupied" data-spot="53"><span class="spot-number">53</span></div>
-                      <div class="parking-spot available" data-spot="54"><span class="spot-number">54</span></div>
-                      <div class="parking-spot occupied" data-spot="55"><span class="spot-number">55</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                      <div class="parking-spot available" data-spot="56"><span class="spot-number">56</span></div>
-                      <div class="parking-spot available" data-spot="57"><span class="spot-number">57</span></div>
-                      <div class="parking-spot available" data-spot="58"><span class="spot-number">58</span></div>
-                      <div class="parking-spot occupied" data-spot="59"><span class="spot-number">59</span></div>
-                      <div class="parking-spot available" data-spot="60"><span class="spot-number">60</span></div>
-                      <div class="aisle">↕</div>
-                      <div class="aisle">↕</div>
-                    </div>
+                    <%
+                        int totalEstacionamientos = listaEstacionamientos.size();
+                        int porFila = 20;
+                        int filas = (int) Math.ceil((double) totalEstacionamientos / porFila);
+                        
+                        // Si no hay estacionamientos, mostrar mensaje
+                        if (totalEstacionamientos == 0) {
+                    %>
+                        <div class="alert alert-warning text-center">
+                            No hay estacionamientos disponibles. 
+                            <a href="EstacionamientoServlet" class="btn btn-primary btn-sm">Recargar</a>
+                        </div>
+                    <%
+                        } else {
+                            // Mostrar estacionamientos dinámicamente
+                            for (int fila = 0; fila < Math.max(3, filas); fila++) {
+                                int start = fila * porFila;
+                                int end = Math.min(start + porFila, totalEstacionamientos);
+                    %>
+                        <div class="road">CARRIL</div>
+                        <!-- Fila <%= fila + 1 %> -->
+                        <div class="parking-row">
+                        <%
+                            for (int j = start; j < end; j++) {
+                                Estacionamiento e = listaEstacionamientos.get(j);
+                                String numero = e.getNumero();
+                                String estado = e.getEstado();
+                                String cssClass = "";
+                                String cursor = "pointer";
+                                String onclick = "";
+                                
+                                if ("disponible".equalsIgnoreCase(estado)) {
+                                    cssClass = "available";
+                                    cursor = "not-allowed";
+                                } else if ("ocupado".equalsIgnoreCase(estado) || "reservado".equalsIgnoreCase(estado)) {
+                                    cssClass = "occupied";
+                                    onclick = "onclick=\"liberarSpot(this)\"";
+                                }
+                                
+                                int posicionEnFila = j - start; // 0 a 19
+                        %>
+                            <div class="parking-spot <%= cssClass %>" 
+                                 data-spot="<%= e.getCodEsta() %>"
+                                 style="cursor: <%= cursor %>;"
+                                 <%= onclick %>>
+                                <span class="spot-number"><%= numero %></span>
+                            </div>
+                            
+                            <%-- Insertar pasillos después de cada 5 espacios (excepto al final) --%>
+                            <% if ((posicionEnFila + 1) % 5 == 0 && (posicionEnFila + 1) < porFila && j < end - 1) { %>
+                                <div class="aisle">↕</div>
+                                <div class="aisle">↕</div>
+                            <% } %>
+                        <%
+                            }
+                            
+                            // Si la fila no está completa, llenar con espacios vacíos para mantener el diseño
+                            int faltantes = porFila - (end - start);
+                            for (int k = 0; k < faltantes; k++) {
+                                int posicion = (end - start) + k;
+                        %>
+                            <div class="parking-spot" style="visibility: hidden;"></div>
+                            <% if ((posicion + 1) % 5 == 0 && (posicion + 1) < porFila) { %>
+                                <div class="aisle" style="visibility: hidden;">↕</div>
+                                <div class="aisle" style="visibility: hidden;">↕</div>
+                            <% } %>
+                        <%
+                            }
+                        %>
+                        </div>
+                    <%
+                            }
+                        }
+                    %>
                     <div class="road">CARRIL</div>
                 </div>
                 <div class="entrance-exit">ENTRADA/SALIDA</div>
@@ -349,5 +342,119 @@
           </div>
         </div>
       </div>
+
+<script>
+  // Lleva el control de los IDs seleccionados
+  const selectedSpots = new Set();
+
+  /**
+   * Se llama al clicar sobre una plaza ocupada/reservada.
+   * @param el  El <div class="parking-spot"> clicado
+   */
+  function liberarSpot(el) {
+    // Solo actuamos si estaba "occupied" o ya "selected"
+    if (!el.classList.contains('occupied') && !el.classList.contains('selected')) {
+      return;
+    }
+
+    // Si estaba ocupado, lo marcamos como seleccionado
+    if (el.classList.contains('occupied')) {
+      el.classList.replace('occupied', 'selected');
+      selectedSpots.add(el.dataset.spot);
+
+    // Si ya estaba seleccionado, lo deseleccionamos
+    } else if (el.classList.contains('selected')) {
+      el.classList.replace('selected', 'occupied');
+      selectedSpots.delete(el.dataset.spot);
+    }
+
+    // Activar o desactivar el botón de confirmación
+    updateConfirmButton();
+  }
+
+  /**
+   * Habilita el botón de confirmación si hay al menos una plaza seleccionada.
+   */
+  function updateConfirmButton() {
+    const btn = document.getElementById('confirmBtn');
+    if (btn) {
+      btn.disabled = selectedSpots.size === 0;
+    }
+  }
+
+  /**
+   * Al clicar en "Confirmar Selección", libera todas las plazas seleccionadas:
+   * 1) Pide confirmación mostrando los números,
+   * 2) Cambia la UI a "available",
+   * 3) Envía un único POST al servlet con todos los IDs seleccionados.
+   */
+  function confirmSelection() {
+    if (selectedSpots.size === 0) {
+      alert('Por favor selecciona al menos un estacionamiento para liberar.');
+      return;
+    }
+
+    // Recogemos los números de plaza para el mensaje
+    const numeros = Array.from(selectedSpots).map(id => {
+      const el = document.querySelector(`.parking-spot[data-spot="${id}"] .spot-number`);
+      return el ? el.textContent.trim() : id;
+    });
+
+    if (!confirm(`¿Estás seguro de que quieres liberar los estacionamientos: ${numeros.join(', ')}?`)) {
+      return;
+    }
+
+    // Cambiamos la UI: de selected → available
+    selectedSpots.forEach(id => {
+      const spotEl = document.querySelector(`.parking-spot[data-spot="${id}"]`);
+      if (spotEl) {
+        spotEl.classList.replace('selected', 'available');
+        spotEl.style.cursor = 'not-allowed';
+        spotEl.removeAttribute('onclick');
+      }
+    });
+
+    // Preparamos y enviamos el form con todos los IDs
+    const form = document.createElement('form');
+    form.method = 'post';
+    form.action = 'EstacionamientoServlet';
+    form.style.display = 'none';
+
+    // Acción para el servlet
+    const inpAcc = document.createElement('input');
+    inpAcc.name  = 'accion';
+    inpAcc.value = 'liberarMultiples';
+    form.appendChild(inpAcc);
+
+    // Cada ID va en un campo 'ids'
+    selectedSpots.forEach(id => {
+      const inp = document.createElement('input');
+      inp.name  = 'ids';
+      inp.value = id;
+      form.appendChild(inp);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  // Al cargar la página, inicializamos el estado del botón
+  document.addEventListener('DOMContentLoaded', function() {
+    updateConfirmButton();
+    
+    // Agregar funcionalidad de recargar datos
+    const recargarBtn = document.createElement('button');
+    recargarBtn.innerHTML = '<i class="bx bx-refresh"></i> Actualizar Estado';
+    recargarBtn.className = 'btn btn-outline-secondary btn-sm ms-2';
+    recargarBtn.onclick = function() {
+      window.location.href = 'EstacionamientoServlet';
+    };
+    
+    const confirmBtn = document.getElementById('confirmBtn');
+    if (confirmBtn && confirmBtn.parentNode) {
+      confirmBtn.parentNode.appendChild(recargarBtn);
+    }
+  });
+</script>
 
 <jsp:include page="footer.jsp" />

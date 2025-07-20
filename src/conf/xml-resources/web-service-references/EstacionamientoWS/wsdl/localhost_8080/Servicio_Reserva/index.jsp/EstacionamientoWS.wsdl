@@ -4,17 +4,11 @@
 <xsd:import namespace="http://WS/" schemaLocation="http://localhost:8080/Servicio_Reserva/index.jsp/EstacionamientoWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="buscarEstacionamientoPorId">
-<part name="parameters" element="tns:buscarEstacionamientoPorId"/>
+<message name="listarEstacionamientos">
+<part name="parameters" element="tns:listarEstacionamientos"/>
 </message>
-<message name="buscarEstacionamientoPorIdResponse">
-<part name="parameters" element="tns:buscarEstacionamientoPorIdResponse"/>
-</message>
-<message name="registrarEstacionamiento">
-<part name="parameters" element="tns:registrarEstacionamiento"/>
-</message>
-<message name="registrarEstacionamientoResponse">
-<part name="parameters" element="tns:registrarEstacionamientoResponse"/>
+<message name="listarEstacionamientosResponse">
+<part name="parameters" element="tns:listarEstacionamientosResponse"/>
 </message>
 <message name="eliminarEstacionamiento">
 <part name="parameters" element="tns:eliminarEstacionamiento"/>
@@ -22,52 +16,49 @@
 <message name="eliminarEstacionamientoResponse">
 <part name="parameters" element="tns:eliminarEstacionamientoResponse"/>
 </message>
+<message name="registrarEstacionamiento">
+<part name="parameters" element="tns:registrarEstacionamiento"/>
+</message>
+<message name="registrarEstacionamientoResponse">
+<part name="parameters" element="tns:registrarEstacionamientoResponse"/>
+</message>
+<message name="buscarEstacionamientoPorId">
+<part name="parameters" element="tns:buscarEstacionamientoPorId"/>
+</message>
+<message name="buscarEstacionamientoPorIdResponse">
+<part name="parameters" element="tns:buscarEstacionamientoPorIdResponse"/>
+</message>
 <message name="actualizarEstacionamiento">
 <part name="parameters" element="tns:actualizarEstacionamiento"/>
 </message>
 <message name="actualizarEstacionamientoResponse">
 <part name="parameters" element="tns:actualizarEstacionamientoResponse"/>
 </message>
-<message name="listarEstacionamientos">
-<part name="parameters" element="tns:listarEstacionamientos"/>
-</message>
-<message name="listarEstacionamientosResponse">
-<part name="parameters" element="tns:listarEstacionamientosResponse"/>
-</message>
 <portType name="EstacionamientoWS">
-<operation name="buscarEstacionamientoPorId">
-<input wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdRequest" message="tns:buscarEstacionamientoPorId"/>
-<output wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdResponse" message="tns:buscarEstacionamientoPorIdResponse"/>
-</operation>
-<operation name="registrarEstacionamiento">
-<input wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoRequest" message="tns:registrarEstacionamiento"/>
-<output wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoResponse" message="tns:registrarEstacionamientoResponse"/>
+<operation name="listarEstacionamientos">
+<input wsam:Action="http://WS/EstacionamientoWS/listarEstacionamientosRequest" message="tns:listarEstacionamientos"/>
+<output wsam:Action="http://WS/EstacionamientoWS/listarEstacionamientosResponse" message="tns:listarEstacionamientosResponse"/>
 </operation>
 <operation name="eliminarEstacionamiento">
 <input wsam:Action="http://WS/EstacionamientoWS/eliminarEstacionamientoRequest" message="tns:eliminarEstacionamiento"/>
 <output wsam:Action="http://WS/EstacionamientoWS/eliminarEstacionamientoResponse" message="tns:eliminarEstacionamientoResponse"/>
 </operation>
+<operation name="registrarEstacionamiento">
+<input wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoRequest" message="tns:registrarEstacionamiento"/>
+<output wsam:Action="http://WS/EstacionamientoWS/registrarEstacionamientoResponse" message="tns:registrarEstacionamientoResponse"/>
+</operation>
+<operation name="buscarEstacionamientoPorId">
+<input wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdRequest" message="tns:buscarEstacionamientoPorId"/>
+<output wsam:Action="http://WS/EstacionamientoWS/buscarEstacionamientoPorIdResponse" message="tns:buscarEstacionamientoPorIdResponse"/>
+</operation>
 <operation name="actualizarEstacionamiento">
 <input wsam:Action="http://WS/EstacionamientoWS/actualizarEstacionamientoRequest" message="tns:actualizarEstacionamiento"/>
 <output wsam:Action="http://WS/EstacionamientoWS/actualizarEstacionamientoResponse" message="tns:actualizarEstacionamientoResponse"/>
 </operation>
-<operation name="listarEstacionamientos">
-<input wsam:Action="http://WS/EstacionamientoWS/listarEstacionamientosRequest" message="tns:listarEstacionamientos"/>
-<output wsam:Action="http://WS/EstacionamientoWS/listarEstacionamientosResponse" message="tns:listarEstacionamientosResponse"/>
-</operation>
 </portType>
 <binding name="EstacionamientoWSPortBinding" type="tns:EstacionamientoWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="buscarEstacionamientoPorId">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="registrarEstacionamiento">
+<operation name="listarEstacionamientos">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -85,7 +76,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="actualizarEstacionamiento">
+<operation name="registrarEstacionamiento">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -94,7 +85,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="listarEstacionamientos">
+<operation name="buscarEstacionamientoPorId">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="actualizarEstacionamiento">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

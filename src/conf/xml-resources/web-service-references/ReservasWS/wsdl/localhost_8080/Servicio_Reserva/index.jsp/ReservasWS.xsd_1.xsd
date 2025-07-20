@@ -133,18 +133,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="listarHistorialReservasPorUsuario">
-<xs:sequence>
-<xs:element name="usuarioId" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="listarHistorialReservasPorUsuarioResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:reserva" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="cambiarEstadoReserva">
 <xs:sequence>
 <xs:element name="idReserva" type="xs:int"/>
@@ -155,6 +143,18 @@
 <xs:complexType name="cambiarEstadoReservaResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listarHistorialReservasPorUsuario">
+<xs:sequence>
+<xs:element name="usuarioId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listarHistorialReservasPorUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:reserva" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

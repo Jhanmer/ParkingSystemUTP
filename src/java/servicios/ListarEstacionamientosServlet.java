@@ -10,26 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ws.Estacionamiento;
-
-import ws.ReservasWS;
-import ws.ReservasWS_Service;
-import ws.Reserva;
+import ws.EstacionamientoWS;
+import ws.EstacionamientoWS_Service;
 
 @WebServlet(name = "ListarEstacionamientosServlet", urlPatterns = {"/ListarEstacionamientosServlet"})
 public class ListarEstacionamientosServlet extends HttpServlet {
 
-    private ReservasWS_Service servicio;
+    private EstacionamientoWS_Service servicio;
 
     @Override
     public void init() throws ServletException {
-        servicio = new ReservasWS_Service();
+        servicio = new EstacionamientoWS_Service();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            ReservasWS port = servicio.getReservasWSPort();
-
+            // Obtener lista de estacionamientos desde el web service
+            EstacionamientoWS port = servicio.getEstacionamientoWSPort();
+            List<Estacionamiento> listaEstacionamientos = port.listarEstacionamientos();
+            
+            // Pasar la lista al JSP
+            request.setAttribute("listaEstacionamientos", listaEstacionamientos);
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher("Parqueo.jsp");
             dispatcher.forward(request, response);
 
@@ -38,5 +41,4 @@ public class ListarEstacionamientosServlet extends HttpServlet {
             response.getWriter().println("Error al consumir el Web Service: " + e.getMessage());
         }
     }
-
 }

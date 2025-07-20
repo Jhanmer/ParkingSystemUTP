@@ -79,7 +79,7 @@
               </a>
               <ul class="menu-sub">
                     <li class="menu-item"> 
-                      <a href="Parqueo.jsp" class="menu-link">
+                      <a href="EstacionamientoServlet" class="menu-link">
                             <div data-i18n="Account">Gestión de Estacionamientos</div>
                       </a>
                     </li>
