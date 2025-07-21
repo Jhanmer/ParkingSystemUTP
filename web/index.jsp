@@ -57,21 +57,23 @@
 
   <!-- JavaScript para sincronizar hora con el servlet -->
 <script>
-  fetch('https://worldtimeapi.org/api/timezone/America/Lima')
-    .then(response => {
-      if (!response.ok) throw new Error("No se pudo obtener la hora.");
-      return response.json();
-    })
-    .then(data => {
-      const datetime = data.datetime; // ej: "2025-07-05T14:40:33.453689-05:00"
-      const hora = datetime.split("T")[1].split(":");
-      const horaFormateada = `${hora[0]}:${hora[1]}:${hora[2].split(".")[0]}`;
-      document.getElementById('hora-peru').textContent = horaFormateada;
-    })
-    .catch(error => {
-      console.error(error);
-      document.getElementById('hora-peru').textContent = 'Error al obtener hora';
-    });
+  function actualizarHora() {
+    fetch('horaPeru')
+      .then(response => {
+        if (!response.ok) throw new Error("No se pudo obtener la hora.");
+        return response.text();
+      })
+      .then(hora => {
+        document.getElementById('hora-peru').textContent = hora;
+      })
+      .catch(error => {
+        console.error("Error al obtener hora:", error);
+        document.getElementById('hora-peru').textContent = 'Error';
+      });
+  }
+  actualizarHora();
+  // Repetir cada 60 segundos
+  setInterval(actualizarHora, 60000); // 60000 milisegundos = 60 segundos
 </script>
 </div>
 <jsp:include page="footer.jsp" />
