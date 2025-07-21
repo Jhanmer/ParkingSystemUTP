@@ -1,67 +1,62 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servicios;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
+
+import java.io.*;
+import java.nio.file.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import util.Conexion; 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import util.Conexion;
 
 @WebServlet("/ActualizarFotoServlet")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1,
-                 maxFileSize = 1024 * 1024 * 5,
-                 maxRequestSize = 1024 * 1024 * 10)
+@MultipartConfig
 public class ActualizarFotoServlet extends HttpServlet {
+
     private static final String UPLOAD_DIR = "assets/img/avatars";
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
 
         String idUsuario = request.getParameter("idUsuario");
         Part filePart = request.getPart("fotoPerfil");
-        String fileName = "usuario_" + idUsuario + ".png";
 
-        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) uploadDir.mkdirs();
-
-        File file = new File(uploadPath + File.separator + fileName);
-        try (InputStream input = filePart.getInputStream()) {
-            Files.copy(input, file.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+        if (idUsuario == null || filePart == null || filePart.getSize() == 0) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Archivo inválido");
+            return;
         }
-        // Ruta relativa para mostrarla en el HTML
-        String rutaRelativa = UPLOAD_DIR + "/" + fileName;
-        Connection conn = null;
-        PreparedStatement ps = null;
 
-        try {
-            conn = Conexion.getConnection(); // Tu clase util.Conexion
-            ps = conn.prepareStatement("UPDATE usuarios SET ruta_foto = ? WHERE id = ?");
+        String fileName = "usuario_" + idUsuario + ".png";
+        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
+
+        File dir = new File(uploadPath);
+        if (!dir.exists()) dir.mkdirs();
+
+        File destino = new File(dir, fileName);
+        try (InputStream input = filePart.getInputStream()) {
+            Files.copy(input, destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        }
+
+        String rutaRelativa = UPLOAD_DIR + "/" + fileName;
+
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE usuarios SET ruta_foto = ? WHERE id = ?")) {
             ps.setString(1, rutaRelativa);
             ps.setString(2, idUsuario);
             ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null) try { ps.close(); } catch (Exception ignored) {}
-            if (conn != null) try { conn.close(); } catch (Exception ignored) {}
+        } catch (SQLException ex) {
+            Logger.getLogger(ActualizarFotoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Guardar la ruta de la imagen en la sesión
+
         request.getSession().setAttribute("rutaFoto", rutaRelativa);
-        response.sendRedirect("index.jsp");
+        response.setContentType("text/plain");
+        response.getWriter().print(rutaRelativa + "?t=" + System.currentTimeMillis()); // rompe caché
     }
 }
-
