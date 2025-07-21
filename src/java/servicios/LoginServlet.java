@@ -11,10 +11,7 @@ import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 import util.Conexion;
 
@@ -27,6 +24,7 @@ public class LoginServlet extends HttpServlet {
 
         String correo = request.getParameter("email-username");
         String contrasena = request.getParameter("password");
+        String recordar = request.getParameter("remember"); // <- Recuérdame checkbox
 
         try {
             LoginResponse resultado = iniciarSesion(correo, contrasena);
@@ -54,7 +52,9 @@ public class LoginServlet extends HttpServlet {
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()) {
                         String rutaFoto = rs.getString("ruta_foto");
-                        session.setAttribute("rutaFoto", (rutaFoto != null && !rutaFoto.isEmpty()) ? rutaFoto : "assets/img/avatars/1.png");
+                        session.setAttribute("rutaFoto", (rutaFoto != null && !rutaFoto.isEmpty())
+                            ? rutaFoto
+                            : "assets/img/avatars/1.png");
                     } else {
                         session.setAttribute("rutaFoto", "assets/img/avatars/1.png");
                     }
@@ -63,7 +63,19 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("rutaFoto", "assets/img/avatars/1.png");
                 }
 
+                // ✅ Recuérdame (guardar/eliminar cookie)
+                if ("on".equals(recordar)) {
+                    Cookie cookie = new Cookie("correoRecordado", correo);
+                    cookie.setMaxAge(60 * 60 * 24 * 7); // 7 días
+                    response.addCookie(cookie);
+                } else {
+                    Cookie cookie = new Cookie("correoRecordado", "");
+                    cookie.setMaxAge(0); // elimina
+                    response.addCookie(cookie);
+                }
+
                 response.sendRedirect("index.jsp");
+
             } else {
                 request.setAttribute("error", resultado.getMessage());
                 request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -76,6 +88,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    // Método para invocar al servicio web de autenticación
     private LoginResponse iniciarSesion(String correo, String contrasena) {
         Login_Service service = new Login_Service();
         Login port = service.getLoginPort();
