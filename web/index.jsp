@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="nav.jsp" />
 <!-- Content wrapper -->
@@ -53,8 +55,68 @@
         </div>
       </div>
     </div>
-  </div>
+    <!-- Información adicional del estudiante -->
+    <div class="row">
 
+      <!-- Puntos acumulados -->
+      <div class="col-md-4 mb-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">Tus puntos</h5>
+            <h2 class="text-success"><%= request.getAttribute("puntos") != null ? request.getAttribute("puntos") : "0" %></h2>
+            <p class="text-muted">Gánalos asistiendo puntualmente</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reserva activa -->
+      <div class="col-md-4 mb-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">Tu reserva de hoy</h5>
+            <%
+              Map<String, String> reserva = (Map<String, String>) request.getAttribute("reservaHoy");
+              if (reserva != null) {
+            %>
+              <p><strong>Espacio:</strong> <%= reserva.get("numero") %></p>
+              <p><strong>Hora:</strong> <%= reserva.get("hora_inicio") %> - <%= reserva.get("hora_fin") %></p>
+            <%
+              } else {
+            %>
+              <p class="text-muted">No tienes reservas activas.</p>
+            <%
+              }
+            %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horario de hoy -->
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Clases de hoy</h5>
+            <ul class="list-unstyled mb-0">
+              <%
+                List<Map<String, String>> horarioHoy = (List<Map<String, String>>) request.getAttribute("horarioHoy");
+                if (horarioHoy != null && !horarioHoy.isEmpty()) {
+                  for (Map<String, String> clase : horarioHoy) {
+              %>
+                <li><strong><%= clase.get("hora_inicio") %> - <%= clase.get("hora_fin") %>:</strong> <%= clase.get("clase") %> (<%= clase.get("aula") %>)</li>
+              <%
+                  }
+                } else {
+              %>
+                <li class="text-muted">No tienes clases hoy.</li>
+              <%
+                }
+              %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- JavaScript para sincronizar hora con el servlet -->
 <script>
   function actualizarHora() {
