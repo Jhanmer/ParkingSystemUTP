@@ -66,11 +66,13 @@ public class LoginServlet extends HttpServlet {
                 // ✅ Recuérdame (guardar/eliminar cookie)
                 if ("on".equals(recordar)) {
                     Cookie cookie = new Cookie("correoRecordado", correo);
+                    cookie.setPath("/"); // ✅ Asegura que sea accesible desde toda la app
                     cookie.setMaxAge(60 * 60 * 24 * 7); // 7 días
                     response.addCookie(cookie);
                 } else {
                     Cookie cookie = new Cookie("correoRecordado", "");
-                    cookie.setMaxAge(0); // elimina
+                    cookie.setPath("/"); // ✅ Muy importante para que se pueda eliminar correctamente
+                    cookie.setMaxAge(0); // Eliminar cookie
                     response.addCookie(cookie);
                 }
 
