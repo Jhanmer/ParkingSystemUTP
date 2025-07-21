@@ -150,8 +150,9 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="<%= session.getAttribute("rutaFoto") != null ? session.getAttribute("rutaFoto") : "assets/img/avatars/1.png" %>" alt class="w-px-40 h-auto rounded-circle" />
-
+                      <img id="avatarUser"
+                        src="<%= session.getAttribute("rutaFoto") != null ? session.getAttribute("rutaFoto") : "assets/img/avatars/1.png" %>"
+                        alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -175,9 +176,9 @@
                     </li>
 
                     <li>
-                      <form id="formFotoPerfil" action="ActualizarFotoServlet" method="POST" enctype="multipart/form-data" style="display: none;">
-                        <input type="file" id="inputFotoPerfil" name="fotoPerfil" accept="image/*" onchange="document.getElementById('formFotoPerfil').submit();" />
-                        <input type="hidden" name="idUsuario" value="<%= session.getAttribute("idUsuario") %>">
+                       <form id="formFotoPerfil" enctype="multipart/form-data" style="display: none;">
+                        <input type="file" id="inputFotoPerfil" name="fotoPerfil" accept="image/*" />
+                        <input type="hidden" name="idUsuario" value="<%= session.getAttribute("idUsuario") %>" />
                       </form>
                       <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('inputFotoPerfil').click();">
                         <i class="bx bx-upload me-2"></i>
@@ -200,5 +201,33 @@
               </ul>
             </div>
           </nav>
+                      <!-- / Navbar -->
+<script>
+  const inputFoto = document.getElementById("inputFotoPerfil");
+  const formFoto = document.getElementById("formFotoPerfil");
+  const avatar = document.getElementById("avatarUser");
 
-          <!-- / Navbar -->
+  inputFoto.addEventListener("change", () => {
+    const formData = new FormData(formFoto);
+
+    fetch("ActualizarFotoServlet", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) throw new Error("Error al subir la imagen");
+      return response.text();
+    })
+    .then(nuevaRuta => {
+      // Actualiza el avatar del navbar
+      avatar.src = nuevaRuta;
+      
+      document.querySelectorAll(".avatar-online img").forEach(img => {
+        img.src = nuevaRuta;
+      });
+    })
+    .catch(error => {
+      alert("No se pudo actualizar la imagen: " + error.message);
+    });
+  });
+</script>       
