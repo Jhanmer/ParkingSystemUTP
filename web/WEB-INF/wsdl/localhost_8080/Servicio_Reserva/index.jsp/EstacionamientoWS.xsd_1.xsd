@@ -20,9 +20,13 @@
 
 <xs:element name="registrarEstacionamientoResponse" type="tns:registrarEstacionamientoResponse"/>
 
-<xs:complexType name="actualizarEstacionamiento">
+<xs:complexType name="listarEstacionamientos">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="listarEstacionamientosResponse">
 <xs:sequence>
-<xs:element name="estacionamiento" type="tns:estacionamiento" minOccurs="0"/>
+<xs:element name="return" type="tns:estacionamiento" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -34,19 +38,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="actualizarEstacionamientoResponse">
+<xs:complexType name="actualizarEstacionamiento">
 <xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
+<xs:element name="estacionamiento" type="tns:estacionamiento" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="listarEstacionamientos">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="listarEstacionamientosResponse">
+<xs:complexType name="actualizarEstacionamientoResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:estacionamiento" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 

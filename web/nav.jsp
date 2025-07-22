@@ -86,19 +86,6 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-car"></i>
-                    <div data-i18n="Account Settings">Consultas</div>
-              </a>
-              <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="vehiculo.jsp" class="menu-link">
-                            <div data-i18n="Account">Consulta de Placa</div>
-                      </a>
-                    </li>
-              </ul>
-            </li>
-            <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-user"></i>
               <div data-i18n="Account Settings">Usuarios</div>
@@ -111,19 +98,6 @@
               </li>
             </ul>
           </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
-                    <div data-i18n="Account Settings">Reportes</div>
-              </a>
-              <ul class="menu-sub">
-                    <li class="menu-item">
-                      <a href="Reportes.jsp" class="menu-link">
-                            <div data-i18n="Account">Reportes y Estadísticas</div>
-                      </a>
-                    </li>
-              </ul>
-            </li>
             <% } %>
           </ul>
         </aside>

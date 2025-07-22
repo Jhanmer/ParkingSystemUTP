@@ -62,18 +62,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="registrarEstacionamiento">
-<xs:sequence>
-<xs:element name="estacionamiento" type="tns:estacionamiento" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="registrarEstacionamientoResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="buscarEstacionamientoPorId">
 <xs:sequence>
 <xs:element name="id" type="xs:int"/>
@@ -83,6 +71,18 @@
 <xs:complexType name="buscarEstacionamientoPorIdResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:estacionamiento" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarEstacionamiento">
+<xs:sequence>
+<xs:element name="estacionamiento" type="tns:estacionamiento" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="registrarEstacionamientoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

@@ -26,6 +26,38 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
+    <target name="wsimport-client-EstacionamientoWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/EstacionamientoWS" destdir="${build.generated.dir}/jax-wsCache/EstacionamientoWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/EstacionamientoWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/EstacionamientoWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Servicio_Reserva/index.jsp/EstacionamientoWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/EstacionamientoWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/EstacionamientoWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-EstacionamientoWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS"/>
+    </target>
+    <target name="wsimport-client-ReservasWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ReservasWS"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ReservasWS" destdir="${build.generated.dir}/jax-wsCache/ReservasWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ReservasWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/ReservasWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Servicio_Reserva/index.jsp/ReservasWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ReservasWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/ReservasWS.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ReservasWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ReservasWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-ReservasWS" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/ReservasWS"/>
+    </target>
     <target name="wsimport-client-ServicioUsuarioService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService"/>
         <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService" destdir="${build.generated.dir}/jax-wsCache/ServicioUsuarioService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ServicioUsuarioService/wsdl/localhost_8080/ServicioUsuario/ServicioUsuarioService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ServicioUsuario/ServicioUsuarioService?wsdl" xnocompile="true" xendorsed="true">
@@ -58,37 +90,5 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/autenticacion"/>
         <delete dir="${build.generated.dir}/jax-wsCache/login"/>
     </target>
-    <target name="wsimport-client-ReservasWS" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/ReservasWS"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ReservasWS" destdir="${build.generated.dir}/jax-wsCache/ReservasWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/ReservasWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/ReservasWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Servicio_Reserva/index.jsp/ReservasWS?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/ReservasWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/ReservasWS.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/ReservasWS"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/ReservasWS">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-ReservasWS" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/ReservasWS"/>
-    </target>
-    <target name="wsimport-client-EstacionamientoWS" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/EstacionamientoWS" destdir="${build.generated.dir}/jax-wsCache/EstacionamientoWS" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/EstacionamientoWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/EstacionamientoWS.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/Servicio_Reserva/index.jsp/EstacionamientoWS?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/EstacionamientoWS/wsdl/localhost_8080/Servicio_Reserva/index.jsp/EstacionamientoWS.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-EstacionamientoWS" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/EstacionamientoWS"/>
-    </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-ServicioUsuarioService, wsimport-client-login, wsimport-client-ReservasWS, wsimport-client-EstacionamientoWS"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-EstacionamientoWS, wsimport-client-ReservasWS, wsimport-client-ServicioUsuarioService, wsimport-client-login"/>
 </project>
