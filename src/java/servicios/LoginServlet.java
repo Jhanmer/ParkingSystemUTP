@@ -76,8 +76,8 @@ public class LoginServlet extends HttpServlet {
                     response.addCookie(cookie);
                 }
 
-                response.sendRedirect("index.jsp");
-
+                response.sendRedirect("inicioEstudiante");
+                
             } else {
                 request.setAttribute("error", resultado.getMessage());
                 request.getRequestDispatcher("login.jsp").forward(request, response);
