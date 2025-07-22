@@ -63,11 +63,6 @@
                 <h4 class="mb-2">Bienvenido al Sistema de Parqueo 🚗</h4>
                 <p class="mb-4">Inicia sesión para gestionar tu acceso vehicular en la universidad</p>
 
-                <!-- ✅ Mensaje SAE -->
-                <div class="alert alert-info text-center" role="alert">
-                  Para desbloquear tu cuenta comunícate con <strong>SAE</strong> o espera 24 horas.
-                </div>
-
                 <form id="formAuthentication" class="mb-3" action="LoginServlet" method="POST" novalidate>
                   <!-- Email -->
                   <div class="mb-3">
