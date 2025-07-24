@@ -72,7 +72,7 @@
         <div class="card">
           <div class="card-body d-flex align-items-center">
             <div class="avatar flex-shrink-0 me-3">
-              <img src="assets/img/icons/unicons/award.png" alt="Puntos" class="rounded" />
+              <img src="assets/img/icons/unicons/points.png" alt="Puntos" class="rounded" />
             </div>
             <div>
               <span class="fw-semibold d-block mb-1">Puntos acumulados</span>
@@ -88,7 +88,7 @@
           <div class="card">
             <div class="card-body d-flex align-items-center">
               <div class="avatar flex-shrink-0 me-3">
-                <img src="assets/img/icons/unicons/car.png" alt="Reserva" class="rounded" />
+                <img src="assets/img/icons/unicons/parking-area.png" alt="Reserva" class="rounded" />
               </div>
               <div>
                 <span class="fw-semibold d-block mb-1">Reserva de hoy</span>
