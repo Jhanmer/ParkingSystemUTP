@@ -33,28 +33,21 @@
                           </div>
                           
                           <c:choose>
-                              <c:when test="${not empty historialReservas && historialReservas.size() > 0}">
-                                  <c:set var="ultimaReserva" value="${historialReservas[0]}" />
-                                  <c:if test="${ultimaReserva.estado eq 'reservada'}">
-                                      <span class="d-block mb-1">Tu Reserva de Estacionamiento es:</span>
-                                      <h3 class="card-title text-nowrap mb-2">${ultimaReserva.fecha}</h3>
-                                      <h3 class="card-title text-nowrap mb-2">${ultimaReserva.horaInicio} - ${ultimaReserva.horaFin}</h3>
-                                      
-                                      <!-- TIMER AGREGADO AQUÍ -->
-                                      <div class="mt-3 p-2 bg-light rounded">
-                                          <div id="timer-reserva-activa">
-                                              <span class="text-muted">⏰ Cargando timer...</span>
-                                          </div>
+                              <c:when test="${not empty reservaActual}">
+                                  <span class="d-block mb-1">Tu Reserva de Estacionamiento es:</span>
+                                  <h3 class="card-title text-nowrap mb-2">${reservaActual.fecha}</h3>
+                                  <h3 class="card-title text-nowrap mb-2">${reservaActual.horaInicio} - ${reservaActual.horaFin}</h3>
+                                  
+                                  <!-- TIMER AGREGADO AQUÍ -->
+                                  <div class="mt-3 p-2 bg-light rounded">
+                                      <div id="timer-reserva-activa">
+                                          <span class="text-muted">⏰ Cargando timer...</span>
                                       </div>
-                                  </c:if>
-                                  <c:if test="${ultimaReserva.estado ne 'reservada'}">
-                                      <span class="d-block mb-1">No tienes reservas activas</span>
-                                      <h3 class="card-title text-nowrap mb-2">¡Haz tu próxima reserva!</h3>
-                                  </c:if>
+                                  </div>
                               </c:when>
                               <c:otherwise>
-                                  <span class="d-block mb-1">No tienes reservas registradas</span>
-                                  <h3 class="card-title text-nowrap mb-2">¡Haz tu primera reserva!</h3>
+                                  <span class="d-block mb-1">No tienes reservas activas</span>
+                                  <h3 class="card-title text-nowrap mb-2">¡Haz tu próxima reserva!</h3>
                               </c:otherwise>
                           </c:choose>
                         </div>
@@ -66,32 +59,20 @@
                           <img src="assets/img/illustrations/carro_reserva.jpg" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png">
                           <div class="card-body">
                             <c:choose>
-                                <c:when test="${not empty historialReservas && historialReservas.size() > 0}">
-                                    <c:set var="ultimaReserva" value="${historialReservas[0]}" />
-                                    <c:if test="${ultimaReserva.estado eq 'reservada'}">
-                                        <div class="text-light small fw-semibold mb-1">Estado de Reserva</div>
-                                        <div class="progress mb-3">
-                                          <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                                Reserva Activa
-                                        </div>
-                                        </div>
-                                        <span class="badge rounded-pill bg-success">Estás reservando el estacionamiento: ${ultimaReserva.numeroEstacionamiento}</span>
-                                    </c:if>
-                                    <c:if test="${ultimaReserva.estado ne 'reservada'}">
-                                        <div class="text-light small fw-semibold mb-1">Estado</div>
-                                        <div class="progress mb-3">
-                                          <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                Sin reservas activas
-                                        </div>
-                                        </div>
-                                        <span class="badge rounded-pill bg-secondary">No hay estacionamiento reservado</span>
-                                    </c:if>
+                                <c:when test="${not empty reservaActual}">
+                                    <div class="text-light small fw-semibold mb-1">Estado de Reserva</div>
+                                    <div class="progress mb-3">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                            Reserva Activa
+                                    </div>
+                                    </div>
+                                    <span class="badge rounded-pill bg-success">Estás reservando el estacionamiento: ${reservaActual.numeroEstacionamiento}</span>
                                 </c:when>
                                 <c:otherwise>
                                     <div class="text-light small fw-semibold mb-1">Estado</div>
                                     <div class="progress mb-3">
                                       <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                            Sin reservas
+                                            Sin reservas activas
                                     </div>
                                     </div>
                                     <span class="badge rounded-pill bg-secondary">No hay estacionamiento reservado</span>
@@ -172,17 +153,14 @@
 <script src="assets/js/timer-reserva.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Solo inicializar timer si hay una reserva activa
-    <c:if test="${not empty historialReservas && historialReservas.size() > 0}">
-        <c:set var="ultimaReserva" value="${historialReservas[0]}" />
-        <c:if test="${ultimaReserva.estado eq 'reservada'}">
-            // Inicializar timer para la reserva activa
-            const timer = inicializarTimerReserva(
-                '${ultimaReserva.fecha}',        // Fecha de la reserva
-                '${ultimaReserva.horaInicio}',   // Hora de inicio
-                'timer-reserva-activa'           // ID del elemento
-            );
-        </c:if>
+    // Solo inicializar timer si hay una reserva actual
+    <c:if test="${not empty reservaActual}">
+        // Inicializar timer para la reserva más reciente
+        const timer = inicializarTimerReserva(
+            '${reservaActual.fecha}',        // Fecha de la reserva
+            '${reservaActual.horaInicio}',   // Hora de inicio
+            'timer-reserva-activa'           // ID del elemento
+        );
     </c:if>
 });
 </script>

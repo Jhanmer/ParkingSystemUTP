@@ -20,7 +20,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.jsp" class="menu-link">
+              <a href="<%= "alumno".equalsIgnoreCase((String)session.getAttribute("rol")) || "profesor".equalsIgnoreCase((String)session.getAttribute("rol")) ? "inicioEstudiante" : "index.jsp" %>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Inicio</div>
               </a>
@@ -204,4 +204,4 @@
       alert("No se pudo actualizar la imagen: " + error.message);
     });
   });
-</script>       
+</script>

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.List" %>
 <%@ page import="ws.ClaseHorario" %>
 <jsp:include page="nav.jsp" />
@@ -83,23 +84,45 @@
       </div>
 
       <!-- Reserva de hoy -->
-      <c:if test="${not empty reservaHoy}">
-        <div class="col-lg-6 col-md-12 mb-4">
-          <div class="card">
-            <div class="card-body d-flex align-items-center">
-              <div class="avatar flex-shrink-0 me-3">
-                <img src="assets/img/icons/unicons/parking-area.png" alt="Reserva" class="rounded" />
-              </div>
-              <div>
-                <span class="fw-semibold d-block mb-1">Reserva de hoy</span>
-                <p class="mb-0">
-                  <strong>${reservaHoy}</strong>
-                </p>
-              </div>
+      <div class="col-lg-6 col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body d-flex align-items-center">
+            <div class="avatar flex-shrink-0 me-3">
+              <img src="assets/img/icons/unicons/parking-area.png" alt="Reserva" class="rounded" />
+            </div>
+            <div>
+              <c:choose>
+                <c:when test="${tieneReservaHoy}">
+                  <span class="fw-semibold d-block mb-1">Reserva de hoy</span>
+                  <p class="mb-0">
+                    <strong>${mensajeReservaHoy}</strong>
+                  </p>
+                  <small class="badge bg-success">${estadoReservaHoy}</small>
+                  
+                  <!-- Timer para la reserva -->
+                  <div class="mt-2" id="timer-dashboard">
+                    <small class="text-muted">⏰ Cargando timer...</small>
+                  </div>
+                </c:when>
+                <c:otherwise>
+                  <span class="fw-semibold d-block mb-1">Sin reserva hoy</span>
+                  <p class="mb-0">
+                    <c:if test="${not empty reservaProxima}">
+                      Próxima: ${reservaProxima.fecha}
+                    </c:if>
+                    <c:if test="${empty reservaProxima}">
+                      No tienes reservas pendientes
+                    </c:if>
+                  </p>
+                  <a href="ReservaVistaServlet" class="btn btn-sm btn-primary mt-1">
+                    <i class="bx bx-plus me-1"></i>Reservar
+                  </a>
+                </c:otherwise>
+              </c:choose>
             </div>
           </div>
         </div>
-      </c:if>
+      </div>
     </div>
 
     <!-- Horario de Clases -->
@@ -317,3 +340,18 @@
 </div>
 
 <jsp:include page="footer.jsp" />
+
+<!-- Incluir timer si hay reserva activa -->
+<c:if test="${tieneReservaHoy}">
+    <script src="assets/js/timer-reserva.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Solo inicializar timer si hay reserva de hoy
+        const timer = inicializarTimerReserva(
+            '${reservaHoy.fecha}',        // Fecha de la reserva
+            '${reservaHoy.horaInicio}',   // Hora de inicio
+            'timer-dashboard'             // ID del elemento
+        );
+    });
+    </script>
+</c:if>

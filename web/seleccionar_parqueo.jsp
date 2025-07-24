@@ -172,7 +172,7 @@
                             </div>
                             <div class="col-md-4 text-md-end">
                                 <div class="d-flex align-items-center justify-content-md-end">
-                                    <img src="assets/img/icons/unicons/award.png" alt="Puntos" class="me-2" width="24">
+                                    <img src="assets/img/icons/unicons/points.png" alt="Puntos" class="me-2" width="24">
                                     <span class="text-muted">Puntos disponibles:</span>
                                     <span class="badge bg-success ms-2 fs-6"><%= puntos %></span>
                                 </div>
@@ -222,19 +222,20 @@
 
                         <div class="mb-3">
                             <label for="horainicio" class="form-label">🕐 Hora de inicio:</label>
-                            <select class="form-control" id="horainicio" name="horainicio" required onchange="calcularHoras()">
-                                <option value="">Selecciona hora de inicio</option>
-                                <option value="08:15">08:15</option>
-                                <option value="09:45">09:45</option>
-                                <option value="11:15">11:15</option>
-                                <option value="12:45">12:45</option>
-                                <option value="14:15">14:15</option>
-                                <option value="15:45">15:45</option>
-                                <option value="17:15">17:15</option>
-                                <option value="18:45">18:45</option>
-                                <option value="20:15">20:15</option>
-                            </select>
-                            <small class="form-text text-muted">Horario de atención: 08:15 - 22:15</small>
+                            <input type="time" 
+                                   class="form-control" 
+                                   id="horainicio" 
+                                   name="horainicio" 
+                                   min="08:15" 
+                                   max="21:30" 
+                                   step="900" 
+                                   required 
+                                   onchange="calcularHoras()">
+                            <small class="form-text text-muted">
+                                <i class='bx bx-info-circle me-1'></i>
+                                Horario disponible: 08:15 - 21:30 (intervalos de 15 minutos). 
+                                La reserva debe terminar antes de las 22:15.
+                            </small>
                         </div>
 
                         <div class="mb-3">
@@ -298,13 +299,13 @@ form.addEventListener('submit', function(e) {
 
 function calcularHoras() {
     const puntosSelect = document.getElementById('puntosUsar');
-    const horaInicioSelect = document.getElementById('horainicio');
+    const horaInicioInput = document.getElementById('horainicio');
     const horasalidaDisplay = document.getElementById('horasalidaDisplay');
     const horasalidaHidden = document.getElementById('horasalida');
     const resumenDiv = document.getElementById('resumenReserva');
     
     const puntos = parseInt(puntosSelect.value);
-    const horaInicio = horaInicioSelect.value;
+    const horaInicio = horaInicioInput.value;
     
     if (!puntos || !horaInicio) {
         horasalidaDisplay.value = '';
