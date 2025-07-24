@@ -1,4 +1,3 @@
-
 package servicios;
 
 import java.io.IOException;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 import ws.Reserva;
+import ws.ReservasWS;
 import ws.ReservasWS_Service;
 
 @WebServlet(name = "ReservarServlet", urlPatterns = {"/ReservarServlet"})
@@ -64,23 +64,63 @@ public class ReservarServlet extends HttpServlet {
             }
             ws.Reserva reserva = port.generarReservaAutomatica(usuarioId, fecha, horaInicio, horaFin);
 
+            // VALIDACIÓN ULTRA SIMPLE - sin métodos que puedan fallar
+            boolean reservaValida = false;
+            
             if (reserva != null) {
+                System.out.println("🔍 Analizando reserva recibida...");
+                System.out.println("   - ID: " + reserva.getId());
+                System.out.println("   - Estacionamiento: " + reserva.getNumeroEstacionamiento());
+                
+                // Verificar solo si existe número de estacionamiento
+                String numeroEstacionamiento = reserva.getNumeroEstacionamiento();
+                if (numeroEstacionamiento != null) {
+                    if (numeroEstacionamiento.length() > 0) {
+                        reservaValida = true;
+                        System.out.println("✅ Reserva válida por número de estacionamiento");
+                    }
+                }
+                
+                if (!reservaValida) {
+                    System.out.println("❌ Sin número de estacionamiento válido");
+                }
+            }
+            
+            if (reservaValida) {
+                System.out.println("✅ Reserva creada exitosamente:");
+                System.out.println("   - ID: " + reserva.getId());
+                System.out.println("   - Estacionamiento: " + reserva.getNumeroEstacionamiento());
+                System.out.println("   - Fecha: " + reserva.getFecha());
+                System.out.println("   - Horario: " + reserva.getHoraInicio() + " - " + reserva.getHoraFin());
+                
                 request.setAttribute("reservaExitosa", true);
-                request.setAttribute("mensajeConfirmacion", "Reserva generada correctamente.");
+                request.setAttribute("mensajeConfirmacion", "Reserva generada correctamente en estacionamiento " + reserva.getNumeroEstacionamiento());
                 request.setAttribute("reservaAsignada", reserva);
+                
             } else {
+                System.out.println("❌ Reserva fallida o incompleta:");
+                if (reserva != null) {
+                    System.out.println("   - ID recibido: " + reserva.getId());
+                    System.out.println("   - Estacionamiento: " + reserva.getNumeroEstacionamiento());
+                    System.out.println("   - Objeto reserva existe pero datos insuficientes");
+                } else {
+                    System.out.println("   - Objeto reserva es null");
+                }
+                
                 request.setAttribute("reservaExitosa", false);
                 request.setAttribute("mensajeError", "No se pudo generar la reserva. Verifica disponibilidad o tus puntos.");
             }
 
         } catch (Exception ex) {
+            System.out.println("❌ Error en ReservarServlet: " + ex.getMessage());
             ex.printStackTrace();
             request.setAttribute("reservaExitosa", false);
             request.setAttribute("mensajeError", "Error en el proceso de reserva: " + ex.getMessage());
         }
 
-        // 4. Redirigir a la página con mensajes
-        request.getRequestDispatcher("seleccionar_parqueo.jsp").forward(request, response);
+        // 4. Redirigir CORRECTAMENTE al servlet vista (no directamente al JSP)
+        System.out.println("🔄 Redirigiendo a ReservaVistaServlet...");
+        request.getRequestDispatcher("ReservaVistaServlet").forward(request, response);
     }
 
     @Override

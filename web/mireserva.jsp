@@ -39,6 +39,13 @@
                                       <span class="d-block mb-1">Tu Reserva de Estacionamiento es:</span>
                                       <h3 class="card-title text-nowrap mb-2">${ultimaReserva.fecha}</h3>
                                       <h3 class="card-title text-nowrap mb-2">${ultimaReserva.horaInicio} - ${ultimaReserva.horaFin}</h3>
+                                      
+                                      <!-- TIMER AGREGADO AQUÍ -->
+                                      <div class="mt-3 p-2 bg-light rounded">
+                                          <div id="timer-reserva-activa">
+                                              <span class="text-muted">⏰ Cargando timer...</span>
+                                          </div>
+                                      </div>
                                   </c:if>
                                   <c:if test="${ultimaReserva.estado ne 'reservada'}">
                                       <span class="d-block mb-1">No tienes reservas activas</span>
@@ -160,3 +167,22 @@
 
 
 <jsp:include page="footer.jsp" />
+
+<!-- Incluir el script del timer -->
+<script src="assets/js/timer-reserva.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Solo inicializar timer si hay una reserva activa
+    <c:if test="${not empty historialReservas && historialReservas.size() > 0}">
+        <c:set var="ultimaReserva" value="${historialReservas[0]}" />
+        <c:if test="${ultimaReserva.estado eq 'reservada'}">
+            // Inicializar timer para la reserva activa
+            const timer = inicializarTimerReserva(
+                '${ultimaReserva.fecha}',        // Fecha de la reserva
+                '${ultimaReserva.horaInicio}',   // Hora de inicio
+                'timer-reserva-activa'           // ID del elemento
+            );
+        </c:if>
+    </c:if>
+});
+</script>

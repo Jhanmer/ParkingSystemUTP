@@ -31,22 +31,22 @@ public class MiReservaServlet extends HttpServlet {
             Integer usuarioId = (Integer) session.getAttribute("idUsuario");
 
             if (usuarioId == null) {
-                response.sendRedirect("login.jsp"); // O maneja el caso de sesión expirada
+                response.sendRedirect("login.jsp");
                 return;
             } 
             
             ReservasWS port = servicio.getReservasWSPort();
             List<Reserva> historialReservas = port.listarHistorialReservasPorUsuario(usuarioId);
-            
-             System.out.println("Reservas encontradas: " + historialReservas.size());
 
             request.setAttribute("historialReservas", historialReservas);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("mireserva.jsp");
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("mireserva.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("Error al consumir el Web Service: " + e.getMessage());
+            request.setAttribute("errorMessage", "Error al cargar las reservas: " + e.getMessage());
+            request.getRequestDispatcher("mireserva.jsp").forward(request, response);
         }
     }
 }
+    
+

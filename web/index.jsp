@@ -4,7 +4,13 @@
 <jsp:include page="nav.jsp" />
 
 <!-- Content wrapper -->
-<div class="content-wrapper">
+<div class="content-      // Cada 2 minutos, hacer un breve highlight para mostrar que está vivo
+      if (tiempoTranscurrido % 120 === 0 && tiempoTranscurrido > 0) {
+        elemento.style.color = '#3498db';
+        setTimeout(() => {
+          elemento.style.color = '#2c3e50';
+        }, 500);
+      }">
   <div class="container-xxl flex-grow-1 container-p-y">
 
     <!-- Bienvenida -->
@@ -51,7 +57,9 @@
               </div>
             </div>
             <span class="fw-semibold d-block mb-1">Hora Perú</span>
-            <h3 class="card-title mb-2" id="hora-peru">Cargando...</h3>
+            <h3 class="card-title mb-2">
+              <span id="hora-peru">--:--:--</span>
+            </h3>
           </div>
         </div>
       </div>
@@ -168,23 +176,144 @@
       </div>
     </div>
   </div>
-     
-  </div>
-
-  <!-- JavaScript para actualizar hora -->
-  <script>
-    function actualizarHora() {
-      fetch('horaPeru')
-        .then(res => res.text())
-        .then(hora => document.getElementById('hora-peru').textContent = hora)
-        .catch(err => {
-          console.error("Error al obtener la hora:", err);
-          document.getElementById('hora-peru').textContent = 'Error';
-        });
+  <!-- JavaScript para sincronizar hora con el servlet -->
+<script>
+  let horaBaseAPI = null;
+  let timestampBaseAPI = null;
+  let ultimaActualizacionAPI = null;
+  
+  // Función para actualizar la hora desde la API
+  function obtenerHoraAPI() {
+    fetch('horaPeru')
+      .then(response => {
+        if (!response.ok) throw new Error("No se pudo obtener la hora.");
+        return response.text();
+      })
+      .then(horaTexto => {
+        // Parsear la hora recibida (formato HH:mm:ss)
+        const partesHora = horaTexto.split(':');
+        if (partesHora.length >= 3) {
+          const ahora = new Date();
+          
+          // Crear un objeto Date con la hora exacta de la API
+          horaBaseAPI = new Date();
+          horaBaseAPI.setHours(parseInt(partesHora[0]));
+          horaBaseAPI.setMinutes(parseInt(partesHora[1]));
+          horaBaseAPI.setSeconds(parseInt(partesHora[2])); // Ahora incluye segundos
+          horaBaseAPI.setMilliseconds(0);
+          
+          // Guardar el timestamp cuando obtuvimos esta hora
+          timestampBaseAPI = Date.now();
+          
+          console.log('Hora actualizada desde API (con segundos):', horaTexto);
+          actualizarDisplayHora();
+        } else if (partesHora.length >= 2) {
+          // Fallback para formato HH:mm (por si acaso)
+          const ahora = new Date();
+          
+          horaBaseAPI = new Date();
+          horaBaseAPI.setHours(parseInt(partesHora[0]));
+          horaBaseAPI.setMinutes(parseInt(partesHora[1]));
+          horaBaseAPI.setSeconds(0);
+          horaBaseAPI.setMilliseconds(0);
+          
+          timestampBaseAPI = Date.now();
+          
+          console.log('Hora actualizada desde API (sin segundos):', horaTexto);
+          actualizarDisplayHora();
+        }
+      })
+      .catch(error => {
+        console.error("Error al obtener hora:", error);
+        document.getElementById('hora-peru').textContent = 'Error de conexión';
+      });
+  }
+  
+  // Función para mostrar la hora calculada en tiempo real
+  function actualizarDisplayHora() {
+    if (horaBaseAPI && timestampBaseAPI) {
+      // Calcular cuántos segundos han pasado desde la última actualización API
+      const tiempoTranscurrido = Math.floor((Date.now() - timestampBaseAPI) / 1000);
+      
+      // Crear nueva hora sumando el tiempo transcurrido
+      const horaActual = new Date(horaBaseAPI.getTime() + (tiempoTranscurrido * 1000));
+      
+      // Formatear la hora con segundos
+      const horaFormateada = horaActual.toLocaleTimeString('es-PE', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      
+      // Actualizar el display
+      document.getElementById('hora-peru').textContent = horaFormateada;
+      
+      // Agregar un indicador visual de que está funcionando
+      const elemento = document.getElementById('hora-peru');
+      elemento.style.color = '#2c3e50';
+      
+      // Cada 5 minutos, hacer un breve highlight para mostrar que está vivo
+      if (tiempoTranscurrido % 300 === 0 && tiempoTranscurrido > 0) {
+        elemento.style.color = '#3498db';
+        setTimeout(() => {
+          elemento.style.color = '#2c3e50';
+        }, 500);
+      }
+    } else {
+      // Si no tenemos datos base, mostrar hora local como fallback
+      const horaLocal = new Date().toLocaleTimeString('es-PE', {
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      document.getElementById('hora-peru').textContent = horaLocal;
     }
-    actualizarHora();
-    setInterval(actualizarHora, 60000); // cada 60 segundos
-  </script>
+  }
+  
+  // Función para verificar si necesitamos re-sincronizar
+  function verificarSincronizacion() {
+    if (timestampBaseAPI) {
+      const tiempoSinActualizar = (Date.now() - timestampBaseAPI) / 1000;
+      
+      // Re-sincronizar cada 2 minutos para mejor precisión con segundos
+      if (tiempoSinActualizar >= 120) { // 2 minutos en lugar de 5
+        console.log('Re-sincronizando hora con API (incluye segundos)...');
+        obtenerHoraAPI();
+      }
+    }
+  }
+  
+  // Inicializar
+  obtenerHoraAPI(); // Obtener hora inicial de la API
+  
+  // Actualizar el display cada segundo para mostrar los segundos avanzando
+  setInterval(actualizarDisplayHora, 1000);
+  
+  // Re-sincronizar con la API cada 2 minutos (más frecuente por los segundos)
+  setInterval(verificarSincronizacion, 30000); // Verificar cada 30 segundos
+  
+  // Re-sincronizar también al hacer clic en la hora (para debug/manual)
+  document.getElementById('hora-peru').addEventListener('click', function() {
+    this.style.color = '#e74c3c';
+    obtenerHoraAPI();
+    setTimeout(() => {
+      this.style.color = '#2c3e50';
+    }, 1000);
+  });
+  
+  // Re-sincronizar cuando la página vuelva a tener foco (ej: cambiar de pestaña)
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+      // La página volvió a estar visible, verificar si necesitamos actualizar
+      const tiempoSinActualizar = timestampBaseAPI ? (Date.now() - timestampBaseAPI) / 1000 : 999;
+      if (tiempoSinActualizar > 60) { // Si han pasado más de 1 minuto
+        obtenerHoraAPI();
+      }
+    }
+  });
+</script>
 </div>
 
 <jsp:include page="footer.jsp" />
